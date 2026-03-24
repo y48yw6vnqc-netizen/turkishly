@@ -3,7 +3,7 @@ services:
     name: turkishly-bot
     runtime: node
     plan: free
-    buildCommand: "npm run build"
+    buildCommand: "npm run build && ls -R mini-app/dist"
     startCommand: "npm run start"
     envVars:
       - key: BOT_TOKEN
