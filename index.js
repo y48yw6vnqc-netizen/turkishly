@@ -8,6 +8,13 @@ const cors = require('cors');
 const path = require('path');
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
+console.log("-----------------------------------------");
+console.log("🚀 SUNUCU BAŞLATIYOR...");
+console.log("📂 Mevcut Klasör (CWD):", process.cwd());
+console.log("🆔 BOT_TOKEN yüklü mü?:", process.env.BOT_TOKEN ? "Evet (Karakter Sayısı: " + process.env.BOT_TOKEN.length + ")" : "HAYIR! (Kritik Eksik)");
+console.log("🔑 GROQ_API_KEY yüklü mü?:", process.env.GROQ_API_KEY ? "Evet" : "Hayır");
+console.log("🌐 MINI_APP_URL:", process.env.MINI_APP_URL || "Tanımlanmamış!");
+console.log("-----------------------------------------");
 const openai = new OpenAI({ apiKey: process.env.GROQ_API_KEY, baseURL: "https://api.groq.com/openai/v1" });
 // --------- HATA YAKALAYICI (ANTI-CRASH) ---------
 process.on('unhandledRejection', (reason, promise) => {
@@ -257,8 +264,10 @@ app.post('/api/complete-subject', (req, res) => {
 
 // WEBHOOK YUKARIYA TAŞINDI
 // --------- STATİK DOSYA SERVİSİ (ÜRETİM) ---------
-// Render.com'da dosya yollarını garantilemek için path.resolve kullanıyoruz
-const distPath = path.resolve(__dirname, 'mini-app', 'dist');
+// Daha sağlam bir yol bulma yöntemi (cwd kullanarak)
+const distPath = path.resolve(process.cwd(), 'mini-app', 'dist');
+
+app.get('/api/ping', (req, res) => res.send(`pong - ${new Date().toISOString()}`));
 
 app.use(express.static(distPath));
 
