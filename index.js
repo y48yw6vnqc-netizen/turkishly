@@ -251,23 +251,21 @@ app.post('/api/complete-subject', (req, res) => {
 
 // WEBHOOK YUKARIYA TAŞINDI
 // --------- STATİK DOSYA SERVİSİ (ÜRETİM) ---------
-const distPath = path.join(__dirname, 'mini-app', 'dist');
-
-if (!fs.existsSync(distPath)) {
-    console.warn(`⚠️ UYARI: Statik dosya klasörü bulunamadı: ${distPath}`);
-}
+// Render.com'da dosya yollarını garantilemek için path.resolve kullanıyoruz
+const distPath = path.resolve(__dirname, 'mini-app', 'dist');
 
 app.use(express.static(distPath));
 
 app.get('*', (req, res) => {
-    // API isteklerini pas geç, diğerlerini index.html'e yönlendir
+    // API isteklerini pas geç
     if (req.path.startsWith('/api')) return res.status(404).json({ error: "Endpoint not found" });
     
     const indexPath = path.join(distPath, 'index.html');
     if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
     } else {
-        res.status(404).send("Mini uygulama dosyaları henüz hazır değil veya derlenmemiş. Lütfen biraz bekleyip sayfayı yenileyin.");
+        // Hata ayıklama için basit bir mesaj
+        res.status(404).send(`Uygulama dosyaları bulunamadı. Lütfen Render dashboard'dan Build işleminin bittiğinden emin olun. (Yol: ${distPath})`);
     }
 });
 
