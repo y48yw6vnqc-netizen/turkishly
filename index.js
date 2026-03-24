@@ -262,7 +262,7 @@ const distPath = path.resolve(__dirname, 'mini-app', 'dist');
 
 app.use(express.static(distPath));
 
-app.get('/*', (req, res) => {
+app.get('(.*)', (req, res) => {
     // API isteklerini pas geç
     if (req.path.startsWith('/api')) return res.status(404).json({ error: "Endpoint not found" });
     
