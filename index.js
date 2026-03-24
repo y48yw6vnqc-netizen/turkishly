@@ -265,26 +265,32 @@ app.post('/api/complete-subject', (req, res) => {
 
 // WEBHOOK YUKARIYA TAŞINDI
 // --------- STATİK DOSYA SERVİSİ (ÜRETİM) ---------
-// Klasör yolunu hem __dirname hem de cwd ile deniyoruz
-const distPath = fs.existsSync(path.join(__dirname, 'mini-app', 'dist')) 
-    ? path.join(__dirname, 'mini-app', 'dist')
-    : path.resolve(process.cwd(), 'mini-app', 'dist');
+// Daha sağlam bir yol bulma yöntemi (cwd kullanarak)
+const distPath = path.resolve(process.cwd(), 'mini-app', 'dist');
 
-console.log("📍 Mini App Klasörü Tespit Edildi:", distPath);
+app.get('/api/ping', (req, res) => res.json({ 
+    status: "ok", 
+    time: new Date().toISOString(), 
+    env: { bot: !!process.env.BOT_TOKEN, groq: !!process.env.GROQ_API_KEY },
+    distExists: fs.existsSync(distPath)
+}));
 
-app.get('/api/ping', (req, res) => res.json({ status: "ok", time: new Date().toISOString(), env: { bot: !!process.env.BOT_TOKEN, groq: !!process.env.GROQ_API_KEY } }));
-
-app.use(express.static(distPath));
-
-// API dışındaki her isteği yakala ve index.html gönder (Hatasız yöntem)
-app.use((req, res) => {
-    if (req.path.startsWith('/api')) return res.status(404).json({ error: "Endpoint not found" });
+// API dışındaki her isteği yakala ve index.html gönder 
+app.use((req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
     
+    // Once statik dosyaları dene (assets, images vb)
+    const filePath = path.join(distPath, req.path);
+    if (fs.existsSync(filePath) && fs.lstatSync(filePath).isFile()) {
+        return res.sendFile(filePath);
+    }
+    
+    // Yoksa index.html gönder (SPA mode)
     const indexPath = path.join(distPath, 'index.html');
     if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
     } else {
-        res.status(404).send(`Uygulama dosyaları henüz derlenmemiş veya bulunamadı. (Yol: ${distPath})`);
+        res.status(404).send(`Hata: Uygulama klasörü bulunamadı veya boş. (Konum: ${distPath})`);
     }
 });
 
