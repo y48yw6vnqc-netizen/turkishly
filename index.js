@@ -9,7 +9,13 @@ const path = require('path');
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const openai = new OpenAI({ apiKey: process.env.GROQ_API_KEY, baseURL: "https://api.groq.com/openai/v1" });
-console.log("Groq API Key yüklendi mi?:", process.env.GROQ_API_KEY ? "Evet (..." + process.env.GROQ_API_KEY.slice(-5) + ")" : "Hayır");
+// --------- HATA YAKALAYICI (ANTI-CRASH) ---------
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('❌ Yakalanamayan Promise Hatası:', reason);
+});
+process.on('uncaughtException', (err) => {
+    console.error('❌ Yakalanamayan İstisna Hatası:', err);
+});
 
 // --------- MINİ APP API SUNUCUSU (EXPRESS) ---------
 const app = express();

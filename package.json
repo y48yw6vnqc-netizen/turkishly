@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "build": "npm install && npm install --prefix mini-app && npm run build --prefix mini-app",
     "pm2:start": "pm2 start index.js --name turkish-bot",
     "pm2:restart": "pm2 restart turkish-bot",
     "pm2:stop": "pm2 stop turkish-bot",
