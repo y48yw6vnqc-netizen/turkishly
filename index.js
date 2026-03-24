@@ -262,16 +262,15 @@ const distPath = path.resolve(__dirname, 'mini-app', 'dist');
 
 app.use(express.static(distPath));
 
-app.get('/:any(.*)', (req, res) => {
-    // API isteklerini pas geç
+// API dışındaki her isteği yakala ve index.html gönder (Hatasız yöntem)
+app.use((req, res) => {
     if (req.path.startsWith('/api')) return res.status(404).json({ error: "Endpoint not found" });
     
     const indexPath = path.join(distPath, 'index.html');
     if (fs.existsSync(indexPath)) {
         res.sendFile(indexPath);
     } else {
-        // Hata ayıklama için basit bir mesaj
-        res.status(404).send(`Uygulama dosyaları bulunamadı. Lütfen Render dashboard'dan Build işleminin bittiğinden emin olun. (Yol: ${distPath})`);
+        res.status(404).send(`Uygulama dosyaları henüz derlenmemiş veya bulunamadı. (Yol: ${distPath})`);
     }
 });
 
