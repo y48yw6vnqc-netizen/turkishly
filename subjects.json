@@ -1,0 +1,32 @@
+[
+  {
+    "id": "pjz733dql",
+    "title": "Turk tili alifbosi",
+    "content": "🌟 Türk Dili Alfabesi 🌟\nMerhaba arkadaşlar! 🤗 Bugün, Türk dili alfabesi hakkında konuşacağız. 📚\nTürk dili alfabesi, 29 harften oluşur 📝 ve her bir harf önemli bir role sahiptir. 🤝\nAlfabemizi öğrenebilmek için, önce büyük harfler 📈 ve küçük harfler 📉 arasındaki farkı bilmemiz gerekir. 🤔\nAyrıca, sesli harfler 🎶 ve sessiz harfler 🗣️ arasındaki farkı da anlamamız önemlidir. 📊\nTürk dili alfabesindeki harfler:\nA 🌟, B 📚, C 📊, Ç 🎯, D 📈, E 📝, F 📊, G 📈, Ğ 🤝, H 📚, I 🎶, İ 📊, J 🎯, K 📈, L 📝, M 📊, N 📈, O 🌟, Ö 📚, P 📊, R 📈, S 📝, Ş 🎯, T 📊, U 🌟, Ü 📚, V 📊, Y 📈, Z 📝\nHer bir harf, Türk dili ve kültürünün önemli bir parçasıdır 🌟. Alfabemizi öğrenmek, dilimizi daha iyi anlamak ve kullanmak için çok önemlidir 📚.\nÖğrenmeye devam edin ve Türk dili alfabesini mükemmel bir şekilde kullanın! 🎉",
+    "questions": [
+      {
+        "id": "3v4zswkzj",
+        "text": "A den sonra hangi harf gelir",
+        "options": [
+          "E",
+          "C",
+          "B",
+          "K"
+        ],
+        "correct": "B"
+      },
+      {
+        "id": "rs6bni1r6",
+        "text": "C den sonra ne gelir",
+        "options": [
+          "G",
+          "L",
+          "S",
+          "Ch"
+        ],
+        "correct": "Ch"
+      }
+    ],
+    "createdAt": "2026-03-22T12:42:43.297Z"
+  }
+]

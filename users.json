@@ -1,0 +1,102 @@
+{
+  "guest_user": {
+    "learnedWordIds": [
+      "rpuhxkj4r",
+      "3w161kp4c",
+      "i5ujrx8b2",
+      "cnlhxj2cm",
+      "b3dv20g5f",
+      "jx8atu6sv",
+      "7ni0ttwyc",
+      "ulpv6ygvt",
+      "amg6d2nt4",
+      "klbahwk75",
+      "gdp9bts89",
+      "ix38bu7h5",
+      "f8okhzv3c",
+      "5jnsjsz5z",
+      "62sx1y8yo",
+      "jqug7a5yt",
+      "qaax2gikc",
+      "j012emiqj"
+    ],
+    "stars": 18,
+    "levelPoints": {
+      "Subject-pjz733dql": 50,
+      "A1-Level": 19,
+      "A1-1": 20,
+      "A1-2": 20,
+      "A1-3": 20,
+      "A1-4": 20,
+      "A1-5": 20
+    },
+    "completedSteps": [
+      "A1-1",
+      "A1-2",
+      "A1-3",
+      "A1-4",
+      "A1-5"
+    ],
+    "completedLevels": [
+      "A1"
+    ],
+    "chatId": 7360824809,
+    "completedSubjects": [
+      "pjz733dql"
+    ]
+  },
+  "7360824809": {
+    "learnedWordIds": [
+      "rpuhxkj4r",
+      "i5ujrx8b2",
+      "3w161kp4c",
+      "cnlhxj2cm",
+      "b3dv20g5f",
+      "jx8atu6sv",
+      "klbahwk75",
+      "7ni0ttwyc",
+      "ulpv6ygvt",
+      "amg6d2nt4",
+      "gdp9bts89",
+      "ix38bu7h5",
+      "62sx1y8yo",
+      "f8okhzv3c",
+      "5jnsjsz5z",
+      "jqug7a5yt",
+      "j012emiqj",
+      "qaax2gikc"
+    ],
+    "stars": 18,
+    "levelPoints": {
+      "A1-Level": 19,
+      "A1-1": 20,
+      "A1-2": 20,
+      "A1-3": 20,
+      "A1-4": 20,
+      "A1-5": 20
+    },
+    "completedSteps": [
+      "A1-1",
+      "A1-2",
+      "A1-3",
+      "A1-4",
+      "A1-5"
+    ],
+    "completedLevels": [
+      "A1"
+    ],
+    "completedSubjects": [],
+    "chatId": null
+  },
+  "7999358209": {
+    "learnedWordIds": [
+      "rpuhxkj4r"
+    ],
+    "stars": 1,
+    "levelPoints": {},
+    "completedSteps": [],
+    "completedLevels": [],
+    "completedSubjects": [],
+    "chatId": null
+  }
+}
