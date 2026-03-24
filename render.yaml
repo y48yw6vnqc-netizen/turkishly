@@ -3,8 +3,8 @@ services:
     name: turkishly-bot
     runtime: node
     plan: free
-    buildCommand: cd mini-app && npm install && npm run build && cd .. && npm install
-    startCommand: node index.js
+    buildCommand: "npm install && cd mini-app && npm install && npm run build && cd .."
+    startCommand: "node index.js"
     envVars:
       - key: BOT_TOKEN
         sync: false
