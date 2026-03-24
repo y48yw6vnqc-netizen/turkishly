@@ -30,9 +30,10 @@ app.use(cors());
 app.use(express.json());
 
 // API Request Logger for debugging
-app.use('/api', (req, res, next) => {
-    const uid = req.params.userId || req.body?.userId || 'unknown';
-    console.log(`[API] ${req.method} ${req.url} - User: ${uid}`);
+app.use((req, res, next) => {
+    if (req.url.startsWith('/api')) {
+        console.log(`[API] ${req.method} ${req.url}`);
+    }
     next();
 });
 
@@ -264,10 +265,14 @@ app.post('/api/complete-subject', (req, res) => {
 
 // WEBHOOK YUKARIYA TAŞINDI
 // --------- STATİK DOSYA SERVİSİ (ÜRETİM) ---------
-// Daha sağlam bir yol bulma yöntemi (cwd kullanarak)
-const distPath = path.resolve(process.cwd(), 'mini-app', 'dist');
+// Klasör yolunu hem __dirname hem de cwd ile deniyoruz
+const distPath = fs.existsSync(path.join(__dirname, 'mini-app', 'dist')) 
+    ? path.join(__dirname, 'mini-app', 'dist')
+    : path.resolve(process.cwd(), 'mini-app', 'dist');
 
-app.get('/api/ping', (req, res) => res.send(`pong - ${new Date().toISOString()}`));
+console.log("📍 Mini App Klasörü Tespit Edildi:", distPath);
+
+app.get('/api/ping', (req, res) => res.json({ status: "ok", time: new Date().toISOString(), env: { bot: !!process.env.BOT_TOKEN, groq: !!process.env.GROQ_API_KEY } }));
 
 app.use(express.static(distPath));
 
@@ -289,26 +294,24 @@ bot.catch((err, ctx) => {
 
 async function startBot() {
     try {
-        await bot.telegram.deleteWebhook();
-        console.log("🧹 Eski Webhook temizlendi.");
+        console.log("🤖 Bot başlatılıyor...");
+        await bot.telegram.getMe(); // Token testi
+        console.log("✅ Token geçerli, bot girişi yapıldı.");
         
-        // Menü butonunu küresel olarak güncelle (yeni URL ile)
+        await bot.telegram.deleteWebhook();
+        
         const miniAppUrl = (process.env.MINI_APP_URL || '').replace(/\/+$/, '');
         if (miniAppUrl) {
             await bot.telegram.setChatMenuButton({
-                menu_button: {
-                    type: 'web_app',
-                    text: '🚀 Kelime Avı',
-                    web_app: { url: miniAppUrl } // No ctx.from.id here, as it's a global menu button
-                }
+                menu_button: { type: 'web_app', text: '🚀 Kelime Avı', web_app: { url: miniAppUrl } }
             });
-            console.log("📍 Menü butonu URL'si güncellendi:", miniAppUrl);
+            console.log("📍 Menü butonu URL'si set edildi:", miniAppUrl);
         }
 
         bot.launch();
-        console.log("🚀 Bot Polling (Sürekli Kontrol) Modunda Başlatıldı!");
+        console.log("🚀 BOT ŞU AN YAYINDA VE POLLING YAPIYOR!");
     } catch (e) {
-        console.error("❌ Bot başlatma hatası:", e.message);
+        console.error("❌ BOT BAŞLATILAMADI (KRİTİK HATA):", e.message);
     }
 }
 
