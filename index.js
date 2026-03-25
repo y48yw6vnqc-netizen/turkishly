@@ -43,7 +43,8 @@ async function syncToGist() {
         const files = {
             "users.json": { content: fs.existsSync(USERS_FILE) ? fs.readFileSync(USERS_FILE, 'utf-8') : "{}" },
             "words.json": { content: fs.existsSync(WORDS_FILE) ? fs.readFileSync(WORDS_FILE, 'utf-8') : "[]" },
-            "subjects.json": { content: fs.existsSync(SUBJECTS_FILE) ? fs.readFileSync(SUBJECTS_FILE, 'utf-8') : "[]" }
+            "subjects.json": { content: fs.existsSync(SUBJECTS_FILE) ? fs.readFileSync(SUBJECTS_FILE, 'utf-8') : "[]" },
+            "pdfs.json": { content: fs.existsSync(PDFS_FILE) ? fs.readFileSync(PDFS_FILE, 'utf-8') : "{}" }
         };
 
         if (gistId) {
@@ -87,6 +88,7 @@ async function restoreFromGist() {
             if (res.data.files["users.json"]) fs.writeFileSync(USERS_FILE, res.data.files["users.json"].content);
             if (res.data.files["words.json"]) fs.writeFileSync(WORDS_FILE, res.data.files["words.json"].content);
             if (res.data.files["subjects.json"]) fs.writeFileSync(SUBJECTS_FILE, res.data.files["subjects.json"].content);
+            if (res.data.files["pdfs.json"]) fs.writeFileSync(PDFS_FILE, res.data.files["pdfs.json"].content);
             console.log("✅ [GIST DB] Render/Makinadaki tüm silinen veriler hafızaya eksiksiz onarıldı!");
         } catch(err) {
             console.error("❌ Gist Geri Yükleme Hatası:", err.message);
@@ -248,8 +250,16 @@ app.post('/api/reset-step', (req, res) => {
 });
 
 const PDFS_FILE = path.join(__dirname, 'pdfs.json');
+console.log("📍 PDF Dosyası Yolu:", PDFS_FILE);
 function readPdfs() {
-    try { return JSON.parse(fs.readFileSync(PDFS_FILE, 'utf-8')); } catch(e) { return {}; }
+    try { 
+        const data = JSON.parse(fs.readFileSync(PDFS_FILE, 'utf-8')); 
+        console.log("📖 PDF Veritabanı Okundu (Kayit Sayisi):", Object.keys(data).length);
+        return data;
+    } catch(e) { 
+        console.error("❌ PDF Okuma Hatası:", e.message);
+        return {}; 
+    }
 }
 function savePdfs(pdfs) {
     fs.writeFileSync(PDFS_FILE, JSON.stringify(pdfs, null, 2));
@@ -389,6 +399,10 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
     console.log(`🚀 API Sunucusu Port ${PORT}'de Başlatıldı!`);
     await restoreFromGist(); // VERİYİ GITHUB'DAN KURTAR
+    if (!process.env.GIST_ID && process.env.GITHUB_TOKEN) {
+        console.log("📥 [GIST DB] İlk Gist veritabanı oluşturuluyor...");
+        await syncToGist(); 
+    }
     startBot();
 });
 
@@ -607,6 +621,7 @@ bot.on(['photo', 'document'], async (ctx) => {
             const key = `${book}_${bType}_${level}`;
             const pdfs = readPdfs();
             pdfs[key] = fileId;
+            console.log("📝 PDF Kaydediliyor - Anahtar:", key, "ID:", fileId);
             savePdfs(pdfs);
             return ctx.reply(`✅ Harika! PDF dosyası başarıyla Telegram altyapısı ile veritabanına kaydedildi.\n\n📚 **Sistem Kaydı:** ${key}\nÖğrenciler menüden bu PDF'i anında 1 saniyede ücretsiz indirebilir.`);
         }
@@ -692,7 +707,7 @@ bot.action(/pdflevel_(.+)_(.+)_(.+)/, async (ctx) => {
     if (fileId) {
         await ctx.editMessageText(`📥 **${BOOK_NAMES[book]} - ${TYPE_NAMES[type]} (${level.toUpperCase()})** dosyası hazırlanıyor...\nLütfen Telegram sunucularının hızı nedeniyle birkaç saniye bekleyin.`, { parse_mode: "Markdown"});
         try {
-            await ctx.telegram.sendDocument(ctx.chat.id, fileId, { caption: `📚 ${BOOK_NAMES[book]} - ${TYPE_NAMES[type]} (${level.toUpperCase()})\nYasin Hoca'nın Resmi Dökümanı - İyi çalışmalar dilerim!` });
+            await ctx.telegram.sendDocument(ctx.chat.id, fileId, { caption: `📚 ${BOOK_NAMES[book]} - ${TYPE_NAMES[type]} (${level.toUpperCase()})\nİyi çalışmalar dilerim!` });
         } catch (e) {
              ctx.reply("❌ Dosya Telegram sunucusundan silinmiş veya bir hata oluştu. Lütfen Yasin Hoca'ya haber verin.");
         }
@@ -763,6 +778,7 @@ bot.on('text', async (ctx) => {
         ctx.telegram.editMessageText(ctx.chat.id, mid.message_id, null, `👨‍🏫 ${comp.choices[0].message.content}`);
     } catch (e) {
         console.error("❌ AI Hatası:", e.message);
+        ctx.telegram.editMessageText(ctx.chat.id, mid.message_id, null, "❌ Üzgünüm, şu an bağlantıda bir sorun yaşıyorum. Lütfen biraz sonra tekrar dene.");
     }
 });
 

@@ -7,13 +7,15 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const USERS_FILE = path.join(__dirname, 'users.json');
 const WORDS_FILE = path.join(__dirname, 'words.json');
 const SUBJECTS_FILE = path.join(__dirname, 'subjects.json');
+const PDFS_FILE = path.join(__dirname, 'pdfs.json');
 
 async function createGist() {
     try {
         const files = {
             "users.json": { content: fs.existsSync(USERS_FILE) ? fs.readFileSync(USERS_FILE, 'utf-8') : "{}" },
             "words.json": { content: fs.existsSync(WORDS_FILE) ? fs.readFileSync(WORDS_FILE, 'utf-8') : "[]" },
-            "subjects.json": { content: fs.existsSync(SUBJECTS_FILE) ? fs.readFileSync(SUBJECTS_FILE, 'utf-8') : "[]" }
+            "subjects.json": { content: fs.existsSync(SUBJECTS_FILE) ? fs.readFileSync(SUBJECTS_FILE, 'utf-8') : "[]" },
+            "pdfs.json": { content: fs.existsSync(PDFS_FILE) ? fs.readFileSync(PDFS_FILE, 'utf-8') : "{}" }
         };
 
         const res = await axios.post(`https://api.github.com/gists`, {
