@@ -770,60 +770,64 @@ bot.on('text', async (ctx) => {
 const dictionaryCache = {};
 
 bot.on('inline_query', async (ctx) => {
-    const query = ctx.inlineQuery.query.trim().toLowerCase();
+    const query = ctx.inlineQuery.query.trim();
     
     // Eğer kişi henüz bir şey yazmadıysa veya tek harf yazdıysa bekle
     if (query.length < 2) {
         return ctx.answerInlineQuery([{
             type: 'article',
             id: 'info',
-            title: '🇹🇷🇺🇿 Akıllı Sözlük',
-            description: 'Çevirmek istediğiniz Türkçe kelimeyi yazın...',
+            title: '🇹🇷🇺🇿 Akıllı Çift Yönlü Sözlük',
+            description: 'Çevirmek istediğiniz Türkçe veya Özbekçe kelimeyi yazın...',
             thumbnail_url: 'https://cdn-icons-png.flaticon.com/512/3233/3233483.png',
-            input_message_content: { message_text: '💡 Sözlük kullanımı: Mektup yazdığınız yere `@SeninBotunAdi kelime` yazınız.', parse_mode: 'Markdown' }
+            input_message_content: { message_text: '💡 Sözlük kullanımı: Herhangi bir sohbette `@SeninBotunAdi kelime` yazarak bekleyiniz.', parse_mode: 'Markdown' }
         }]);
     }
+
+    const cacheKey = query.toLowerCase();
 
     try {
         let resultData;
 
-        // Önce kendi belleğimize (cache) bakıyoruz. API israfını önler ve anında yanıt verir.
-        if (dictionaryCache[query]) {
-            resultData = dictionaryCache[query];
+        // Önce kendi belleğimize (cache) bakıyoruz.
+        if (dictionaryCache[cacheKey]) {
+            resultData = dictionaryCache[cacheKey];
         } else {
-            // Groq Yapay Zekadan Çeviri İste (JSON formatında)
+            // Groq Yapay Zekadan Çift Yönlü Çeviri İste (JSON formatında)
             const comp = await openai.chat.completions.create({
                 model: "llama-3.3-70b-versatile",
                 response_format: { type: "json_object" },
                 messages: [
                     { 
                         role: "system", 
-                        content: `Sen eşsiz ve akademik bir Türkçe-Özbekçe sözlüksün. Kullanıcının verdiği kelimenin Özbekçe baş çevirisini (Latin alfabesiyle) ve çok hoş tasarımlı HTML kartını hazırla. Çıktı SADECE JSON olmalıdır.
+                        content: `Sen eşsiz, akademik ve çift yönlü çalışan (Türkçe <-> Özbekçe) bir sözlüksün. Ekstra derin arastırma yeteneğine sahipsin.
+Görevin: Kullanıcının girdiği kelimenin dilini otomatik anla ve diğer dile çevir. Kelimenin TÜM ANLAMLARINI (derinlikleriyle) ve Varsa EŞ ANLAMLILARINI (yerine kullanılabilecek kelimeleri) listele. Zengin, zarif bir HTML tasarımı oluştur ve metnin en altına Yasin Hoca imzasını ekle.
+Çıktı SADECE JSON olmalıdır.
 JSON Şablonu:
 {
-  "uzbek": "Özbekçe çevirisi (örn: Qalam)",
-  "short_desc": "Kısaca türkçe veya özbekçe anlamı / çekimi",
-  "html_view": "🇹🇷 <b>[Türkçe]</b>\\n🇺🇿 <b>[Özbekçe Karşılığı]</b>\\n\\n📖 [Özenle seçilmiş, profesyonel bir Türkçe örnek cümle]\\n🇺🇿 [O cümlenin Özbekçe çevirisi]"
+  "title": "Çevrilen Kelimenin Ana Karşılığı (Örn: Qalam / Kalem)",
+  "short_desc": "Tüm anlamlarının kısa bir özeti (virgüllerle)",
+  "html_view": "🇹🇷 <b>[Türkçe Kelime]</b>\\n🇺🇿 <b>[Özbekçe Kelime]</b>\\n\\n🔍 <b>Anlamları (Ma'nolari):</b> [Kelimenin tüm derin anlamları]\\n🔄 <b>Eş Anlamlılar (Sinonimlar):</b> [Yerine kullanılabilecek diğer kelimeler]\\n\\n📖 <b>Örnek (Misol):</b>\\n🇹🇷 [Özenle seçilmiş Türkçe örnek cümle]\\n🇺🇿 [O cümlenin Özbekçe çevirisi]\\n\\n<i>✍️ Yasin Hoca</i>"
 }`
                     },
-                    { role: "user", content: `Lütfen şu kelime/terimi mükemmel bir şekilde sözlüğe çevir: ${query}` }
+                    { role: "user", content: `Aşağıdaki kelimenin her iki dildeki mükemmel çevirisini ve derin anlamlarını ver: ${query}` }
                 ],
-                temperature: 0.2
+                temperature: 0.3
             });
 
             resultData = JSON.parse(comp.choices[0].message.content);
-            dictionaryCache[query] = resultData; // Öğrenilmiş kelimeyi belleğe at
+            dictionaryCache[cacheKey] = resultData; // Öğrenilmiş kelimeyi belleğe at
         }
 
         // Telegram'a Listeli Yanıt Fırlat (Kişinin klavyesinin üstünde pop-up çıkar)
         await ctx.answerInlineQuery([{
             type: 'article',
-            id: query,
-            title: `🇺🇿 ${resultData.uzbek}`,
+            id: cacheKey,
+            title: `✨ ${resultData.title}`,
             description: resultData.short_desc,
             thumbnail_url: 'https://cdn-icons-png.flaticon.com/512/3362/3362635.png',
             input_message_content: {
-                message_text: `🏛️ <b>Yasin Hoca Lûgatı</b>\n\n${resultData.html_view}\n`,
+                message_text: `🏛️ <b>Kapsamlı Yasin Hoca Lûgatı</b>\n\n${resultData.html_view}`,
                 parse_mode: 'HTML'
             }
         }], { cache_time: 86400 }); // Aynı aramayı Telegram 1 günlüğüne hatırlasın
