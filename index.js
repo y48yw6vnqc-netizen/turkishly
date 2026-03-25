@@ -14,9 +14,10 @@ console.log("📂 Mevcut Klasör (CWD):", process.cwd());
 console.log("🆔 BOT_TOKEN yüklü mü?:", process.env.BOT_TOKEN ? "Evet (Karakter Sayısı: " + process.env.BOT_TOKEN.length + ")" : "HAYIR! (Kritik Eksik)");
 console.log("🔑 GROQ_API_KEY yüklü mü?:", process.env.GROQ_API_KEY ? "Evet" : "Hayır");
 console.log("🌐 MINI_APP_URL:", process.env.MINI_APP_URL || "Tanımlanmamış!");
+console.log("🐙 GITHUB_TOKEN (Gist DB):", process.env.GITHUB_TOKEN ? "Evet, Veri Yedeklenecek!" : "HAYIR (Geçici Hafıza)");
 console.log("-----------------------------------------");
 const openai = new OpenAI({ apiKey: process.env.GROQ_API_KEY, baseURL: "https://api.groq.com/openai/v1" });
-// --------- HATA YAKALAYICI (ANTI-CRASH) ---------
+
 process.on('unhandledRejection', (reason, promise) => {
     console.error('❌ Yakalanamayan Promise Hatası:', reason);
 });
@@ -24,12 +25,81 @@ process.on('uncaughtException', (err) => {
     console.error('❌ Yakalanamayan İstisna Hatası:', err);
 });
 
+// DOSYA YOLLARI
+const USERS_FILE = path.join(__dirname, 'users.json');
+const WORDS_FILE = path.join(__dirname, 'words.json');
+const SUBJECTS_FILE = path.join(__dirname, 'subjects.json');
+
+// ====================================================
+// =        GITHUB GIST VERİTABANI YEDEK SİSTEMİ      =
+// ====================================================
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+let gistSyncTimeout = null;
+
+async function syncToGist() {
+    if (!GITHUB_TOKEN) return;
+    try {
+        let gistId = process.env.GIST_ID;
+        const files = {
+            "users.json": { content: fs.existsSync(USERS_FILE) ? fs.readFileSync(USERS_FILE, 'utf-8') : "{}" },
+            "words.json": { content: fs.existsSync(WORDS_FILE) ? fs.readFileSync(WORDS_FILE, 'utf-8') : "[]" },
+            "subjects.json": { content: fs.existsSync(SUBJECTS_FILE) ? fs.readFileSync(SUBJECTS_FILE, 'utf-8') : "[]" }
+        };
+
+        if (gistId) {
+            await axios.patch(`https://api.github.com/gists/${gistId}`, { files }, {
+                headers: { Authorization: `token ${GITHUB_TOKEN}`, Accept: "application/vnd.github.v3+json" }
+            });
+            console.log("💾 [GIST DB] Veriler GitHub'a otomatik yedeklendi.");
+        } else {
+            // İlk kez açılıyorsa Gist oluştur
+            const res = await axios.post(`https://api.github.com/gists`, {
+                description: "Turkishly Bot (Gizli Veritabanı Yedekleri)",
+                public: false,
+                files
+            }, {
+                headers: { Authorization: `token ${GITHUB_TOKEN}`, Accept: "application/vnd.github.v3+json" }
+            });
+            gistId = res.data.id;
+            fs.appendFileSync(path.join(__dirname, '.env'), `\nGIST_ID=${gistId}\n`);
+            process.env.GIST_ID = gistId; // Bellek içi güncelle
+            console.log(`🎉 [GIST DB] İLK VERİTABANI HAZIR! GIST_ID (.env) eklendi: ${gistId}`);
+        }
+    } catch(err) {
+        console.error("❌ Gist Yedekleme Hatası:", err.response ? err.response.data : err.message);
+    }
+}
+
+function triggerGistSync() {
+    if (gistSyncTimeout) clearTimeout(gistSyncTimeout);
+    // 5 Saniye içinde toplu işlem varsa biriktir, tek seferde GitHub'a gönder (Limiti aşmamak için)
+    gistSyncTimeout = setTimeout(syncToGist, 5000); 
+}
+
+async function restoreFromGist() {
+    const gistId = process.env.GIST_ID;
+    if (gistId && GITHUB_TOKEN) {
+        try {
+            console.log("📥 [GIST DB] İnternet hafızasından veriler yerel diske kurtarılıyor...");
+            const res = await axios.get(`https://api.github.com/gists/${gistId}`, {
+                headers: { Authorization: `token ${GITHUB_TOKEN}`, Accept: "application/vnd.github.v3+json" }
+            });
+            if (res.data.files["users.json"]) fs.writeFileSync(USERS_FILE, res.data.files["users.json"].content);
+            if (res.data.files["words.json"]) fs.writeFileSync(WORDS_FILE, res.data.files["words.json"].content);
+            if (res.data.files["subjects.json"]) fs.writeFileSync(SUBJECTS_FILE, res.data.files["subjects.json"].content);
+            console.log("✅ [GIST DB] Render/Makinadaki tüm silinen veriler hafızaya eksiksiz onarıldı!");
+        } catch(err) {
+            console.error("❌ Gist Geri Yükleme Hatası:", err.message);
+        }
+    }
+}
+// ====================================================
+
 // --------- MINİ APP API SUNUCUSU (EXPRESS) ---------
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// API Request Logger for debugging
 app.use((req, res, next) => {
     if (req.url.startsWith('/api')) {
         console.log(`[API] ${req.method} ${req.url}`);
@@ -37,20 +107,35 @@ app.use((req, res, next) => {
     next();
 });
 
-// WEBHOOK DESTEĞİ (EN ÜSTTE)
 app.post('/api/bot-webhook', (req, res) => {
     console.log("📥 Bot Webhook'u tetiklendi...");
     bot.handleUpdate(req.body);
     res.sendStatus(200);
 });
 
-const USERS_FILE = path.join(__dirname, 'users.json');
-
+// STANDART DOSYA İŞLEMLERİ 
 function readUsers() {
     try { return JSON.parse(fs.readFileSync(USERS_FILE, 'utf-8')); } catch (e) { return {}; }
 }
 function saveUsers(users) {
     fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
+    triggerGistSync(); // YEDEKLE
+}
+
+function readWords() {
+    try { return JSON.parse(fs.readFileSync(WORDS_FILE, 'utf-8')); } catch (e) { return []; }
+}
+function saveWords(words) {
+    fs.writeFileSync(WORDS_FILE, JSON.stringify(words, null, 2));
+    triggerGistSync(); // YEDEKLE
+}
+
+function readSubjects() {
+    try { return JSON.parse(fs.readFileSync(SUBJECTS_FILE, 'utf-8')); } catch (e) { return []; }
+}
+function saveSubjects(subs) {
+    fs.writeFileSync(SUBJECTS_FILE, JSON.stringify(subs, null, 2));
+    triggerGistSync(); // YEDEKLE
 }
 
 const ensureUser = (userId, chatId = null) => {
@@ -162,14 +247,6 @@ app.post('/api/reset-step', (req, res) => {
     res.json({ ...users[userId], points: totalPoints });
 });
 
-const WORDS_FILE = path.join(__dirname, 'words.json');
-function readWords() {
-    try { return JSON.parse(fs.readFileSync(WORDS_FILE, 'utf-8')); } catch (e) { return []; }
-}
-function saveWords(words) {
-    fs.writeFileSync(WORDS_FILE, JSON.stringify(words, null, 2));
-}
-
 app.get('/api/words', (req, res) => {
     const { level, step } = req.query;
     let words = readWords();
@@ -195,15 +272,6 @@ app.delete('/api/words/:id', (req, res) => {
     saveWords(words);
     res.json({ success: true });
 });
-
-// --------- KONULAR VE BECERİLER API ---------
-const SUBJECTS_FILE = path.join(__dirname, 'subjects.json');
-function readSubjects() {
-    try { return JSON.parse(fs.readFileSync(SUBJECTS_FILE, 'utf-8')); } catch (e) { return []; }
-}
-function saveSubjects(subs) {
-    fs.writeFileSync(SUBJECTS_FILE, JSON.stringify(subs, null, 2));
-}
 
 app.get('/api/subjects', (req, res) => {
     res.json(readSubjects());
@@ -255,7 +323,6 @@ app.post('/api/complete-subject', (req, res) => {
     const users = readUsers();
     if (!users[userId].completedSubjects.includes(subjectId)) {
         users[userId].completedSubjects.push(subjectId);
-        // Bonus puan
         users[userId].levelPoints[`Subject-${subjectId}`] = Math.round((score / total) * 50); 
         saveUsers(users);
     }
@@ -263,35 +330,24 @@ app.post('/api/complete-subject', (req, res) => {
     res.json({ ...users[userId], points: totalPoints });
 });
 
-// WEBHOOK YUKARIYA TAŞINDI
-// --------- STATİK DOSYA SERVİSİ (ÜRETİM) ---------
-// Daha sağlam bir yol bulma yöntemi (cwd kullanarak)
 const distPath = path.resolve(process.cwd(), 'mini-app', 'dist');
 
 app.get('/api/ping', (req, res) => res.json({ 
     status: "ok", 
     time: new Date().toISOString(), 
-    env: { bot: !!process.env.BOT_TOKEN, groq: !!process.env.GROQ_API_KEY },
+    env: { bot: !!process.env.BOT_TOKEN, groq: !!process.env.GROQ_API_KEY, gist: !!process.env.GITHUB_TOKEN },
     distExists: fs.existsSync(distPath)
 }));
 
-// API dışındaki her isteği yakala ve index.html gönder 
 app.use((req, res, next) => {
     if (req.path.startsWith('/api')) return next();
-    
-    // Once statik dosyaları dene (assets, images vb)
     const filePath = path.join(distPath, req.path);
     if (fs.existsSync(filePath) && fs.lstatSync(filePath).isFile()) {
         return res.sendFile(filePath);
     }
-    
-    // Yoksa index.html gönder (SPA mode)
     const indexPath = path.join(distPath, 'index.html');
-    if (fs.existsSync(indexPath)) {
-        res.sendFile(indexPath);
-    } else {
-        res.status(404).send(`Hata: Uygulama klasörü bulunamadı veya boş. (Konum: ${distPath})`);
-    }
+    if (fs.existsSync(indexPath)) res.sendFile(indexPath);
+    else res.status(404).send(`Hata: Uygulama klasörü bulunamadı veya boş. (Konum: ${distPath})`);
 });
 
 bot.catch((err, ctx) => {
@@ -301,9 +357,8 @@ bot.catch((err, ctx) => {
 async function startBot() {
     try {
         console.log("🤖 Bot başlatılıyor...");
-        await bot.telegram.getMe(); // Token testi
+        await bot.telegram.getMe(); 
         console.log("✅ Token geçerli, bot girişi yapıldı.");
-        
         await bot.telegram.deleteWebhook();
         
         const miniAppUrl = (process.env.MINI_APP_URL || '').replace(/\/+$/, '');
@@ -322,14 +377,15 @@ async function startBot() {
 }
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`🚀 API Sunucusu Port ${PORT}'de Başlatıldı!`);
+    await restoreFromGist(); // VERİYİ GITHUB'DAN KURTAR
     startBot();
 });
 
 bot.command('post', async (ctx) => {
-    if (ctx.from.id.toString() === "6429306893" || ctx.from.id.toString() === "7360824809" || ctx.from.username === "k_yasin") { // Yetkili ID'ler
-        const topic = ctx.message.text.split(' ').slice(1).join(' '); // Komuttan sonraki metni al
+    if (ctx.from.id.toString() === "6429306893" || ctx.from.id.toString() === "7360824809" || ctx.from.username === "k_yasin") { 
+        const topic = ctx.message.text.split(' ').slice(1).join(' '); 
         await ctx.reply(`🚀 "${topic || 'Genel Türkçe'}" konusu kanala gönderiliyor...`);
         await postToChannel(topic);
     } else {
@@ -338,7 +394,7 @@ bot.command('post', async (ctx) => {
 });
 
 bot.start(async (ctx) => {
-    ensureUser('guest_user', ctx.chat.id); // 'guest_user' holds the chatId for current demo
+    ensureUser('guest_user', ctx.chat.id); 
     const miniAppUrl = (process.env.MINI_APP_URL || 'https://holes-green-euro-heavily.trycloudflare.com').replace(/\/+$/, '');
     try {
         await ctx.telegram.setChatMenuButton({ menu_button: { type: 'web_app', text: '🚀 Kelime Avı', web_app: { url: `${miniAppUrl}?uid=${ctx.from.id}` } } });
@@ -350,7 +406,6 @@ bot.start(async (ctx) => {
     ]).resize());
 });
 
-// GÜNLÜK BİLDİRİM SİSTEMİ (Örn: Her gün saat 10:00'da)
 function sendDailyReminders() {
     const users = readUsers();
     Object.values(users).forEach(user => {
@@ -360,17 +415,14 @@ function sendDailyReminders() {
     });
 }
 
-// KANALA GÜNLÜK POST GÖNDERME (Akıllı Yönlendirme: Birleşik veya Ayrı)
 async function postToChannel(topic = "", fileId = null, fileType = "photo") {
     const channelId = process.env.CHANNEL_ID;
     if (!channelId) return;
 
     try {
         const selectedTopic = topic || "Genel Türkçe Dil Bilgisi";
-        // Kullanıcı "detaylı" istiyorsa veya bir ders anlatımı bekliyorsa kilitleri aç
         const isDetailed = /detaylı|uzun|geniş|açıklayıcı|anlat|bilgi|nedir|öğret|notlar/i.test(selectedTopic);
-        const charLimit = isDetailed ? 4000 : 950;
-
+        
         const comp = await openai.chat.completions.create({
             model: "llama-3.3-70b-versatile",
             messages: [
@@ -393,41 +445,30 @@ async function postToChannel(topic = "", fileId = null, fileType = "photo") {
 
         if (fileId) {
             if (isDetailed || text.length > 1024) {
-               // Ayrı gönder
                if (fileType === "document") await bot.telegram.sendDocument(channelId, fileId);
                else await bot.telegram.sendPhoto(channelId, fileId);
                await bot.telegram.sendMessage(channelId, text, { parse_mode: 'HTML' });
             } else {
-               // Birleşik gönder
                if (fileType === "document") await bot.telegram.sendDocument(channelId, fileId, { caption: text, parse_mode: 'HTML' });
                else await bot.telegram.sendPhoto(channelId, fileId, { caption: text, parse_mode: 'HTML' });
             }
         } else {
             await bot.telegram.sendMessage(channelId, text, { parse_mode: 'HTML' });
         }
-        
-        console.log(`✅ Kanal postu (${isDetailed ? 'Derin - Ayrı' : 'Kısa - Birleşik'}) paylaşıldı!`);
     } catch (e) {
         console.error("❌ Kanal post hatası:", e.message);
     }
 }
 
-// FOTOĞRAFLI POST HAZIRLAMA KOMUTU
 bot.on(['photo', 'document'], async (ctx) => {
     if (ctx.from.id.toString() === "6429306893" || ctx.from.id.toString() === "7360824809" || ctx.from.username === "k_yasin") {
         let topic = ctx.message.caption || "Genel Türkçe Bilgisi";
-        // '/post' komutunu ve başındaki boşlukları temizle
         topic = topic.replace(/^\/post\s*/i, '').trim() || "Genel Türkçe Bilgisi";
-        
-        let fileId;
-        let type = "photo";
-
+        let fileId; let type = "photo";
         if (ctx.message.photo) {
-            fileId = ctx.message.photo[ctx.message.photo.length - 1].file_id;
-            type = "photo";
+            fileId = ctx.message.photo[ctx.message.photo.length - 1].file_id; type = "photo";
         } else if (ctx.message.document && ctx.message.document.mime_type.startsWith('image/')) {
-            fileId = ctx.message.document.file_id;
-            type = "document";
+            fileId = ctx.message.document.file_id; type = "document";
         } else {
             return ctx.reply("❌ Lütfen sadece fotoğraf gönderin!");
         }
@@ -439,15 +480,13 @@ bot.on(['photo', 'document'], async (ctx) => {
     }
 });
 
-// Her saat başı kontrol et (Basit Cron)
 setInterval(() => {
     const now = new Date();
-    if (now.getHours() === 10) { // Her sabah 10'da
+    if (now.getHours() === 10) { 
         sendDailyReminders();
         postToChannel();
     }
 }, 3600000); 
-
 
 bot.hears('🎙 Telaffuz Pratiği Yap', (ctx) => ctx.reply("Harika! Telaffuz yeteneklerini geliştirelim. Lütfen aşağıdaki cümleyi sesli olarak oku:\n🎤 'Bugün hava çok güzel!'"));
 bot.hears('☕ Serbest Sohbet Et', (ctx) => ctx.reply("Serbest sohbet moduna geçtik. Seni dinliyorum; dilediğin konuda Türkçe olarak sohbet edebilirsin. 😊"));
@@ -466,11 +505,11 @@ bot.on('voice', async (ctx) => {
     try {
         const link = await ctx.telegram.getFileLink(ctx.message.voice.file_id);
         const res = await axios({ url: link.href, responseType: 'stream' });
-        const path = `./${ctx.message.voice.file_id}.ogg`;
-        const writer = fs.createWriteStream(path);
+        const pathS = `./${ctx.message.voice.file_id}.ogg`;
+        const writer = fs.createWriteStream(pathS);
         res.data.pipe(writer);
         await new Promise(r => writer.on('finish', r));
-        const trans = await openai.audio.transcriptions.create({ file: fs.createReadStream(path), model: "whisper-large-v3", language: "tr" });
+        const trans = await openai.audio.transcriptions.create({ file: fs.createReadStream(pathS), model: "whisper-large-v3", language: "tr" });
         const comp = await openai.chat.completions.create({
             model: "llama-3.3-70b-versatile",
             messages: [
@@ -481,7 +520,7 @@ bot.on('voice', async (ctx) => {
             top_p: 0.1
         });
         await ctx.telegram.editMessageText(ctx.chat.id, mid.message_id, null, `👨‍🏫 ${comp.choices[0].message.content}`);
-        fs.unlinkSync(path);
+        fs.unlinkSync(pathS);
     } catch (e) {
         console.error("❌ AI Hatası:", e.message);
         ctx.reply("❌ Bir hata oluştu!");
@@ -489,8 +528,6 @@ bot.on('voice', async (ctx) => {
 });
 
 bot.on('text', async (ctx) => {
-    console.log("📨 Gelen Mesaj Chat ID:", ctx.chat.id);
-    if (ctx.message.forward_from_chat) console.log("📢 İletilen Kanal ID:", ctx.message.forward_from_chat.id);
     if (ctx.message.text.startsWith('/')) return;
     const mid = await ctx.reply('🤔 Düşünüyorum...');
     try {
