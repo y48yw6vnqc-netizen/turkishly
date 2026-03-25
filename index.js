@@ -359,18 +359,19 @@ async function startBot() {
         console.log("🤖 Bot başlatılıyor...");
         await bot.telegram.getMe(); 
         console.log("✅ Token geçerli, bot girişi yapıldı.");
-        await bot.telegram.deleteWebhook();
-        
         const miniAppUrl = (process.env.MINI_APP_URL || '').replace(/\/+$/, '');
         if (miniAppUrl) {
             await bot.telegram.setChatMenuButton({
                 menu_button: { type: 'web_app', text: '🚀 Kelime Avı', web_app: { url: miniAppUrl } }
             });
             console.log("📍 Menü butonu URL'si set edildi:", miniAppUrl);
+            await bot.telegram.setWebhook(`${miniAppUrl}/api/bot-webhook`);
+            console.log(`🚀 BOT WEBHOOK İLE YAYINDA: ${miniAppUrl}/api/bot-webhook`);
+        } else {
+            await bot.telegram.deleteWebhook();
+            bot.launch();
+            console.log("🚀 BOT ŞU AN YAYINDA VE POLLING YAPIYOR!");
         }
-
-        bot.launch();
-        console.log("🚀 BOT ŞU AN YAYINDA VE POLLING YAPIYOR!");
     } catch (e) {
         console.error("❌ BOT BAŞLATILAMADI (KRİTİK HATA):", e.message);
     }
