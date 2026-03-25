@@ -247,6 +247,14 @@ app.post('/api/reset-step', (req, res) => {
     res.json({ ...users[userId], points: totalPoints });
 });
 
+const PDFS_FILE = path.join(__dirname, 'pdfs.json');
+function readPdfs() {
+    try { return JSON.parse(fs.readFileSync(PDFS_FILE, 'utf-8')); } catch(e) { return {}; }
+}
+function savePdfs(pdfs) {
+    fs.writeFileSync(PDFS_FILE, JSON.stringify(pdfs, null, 2));
+    if (typeof triggerGistSync === 'function') triggerGistSync(); // YEDEKLE
+}
 app.get('/api/words', (req, res) => {
     const { level, step } = req.query;
     let words = readWords();
@@ -384,6 +392,51 @@ app.listen(PORT, async () => {
     startBot();
 });
 
+// --- ZORUNLU KANAL ABONELİĞİ (FORCE SUBSCRIPTION) KONTROLÜ ---
+const REQUIRED_CHANNELS = ["@unity4_academy", "@turkishly"]; // Bekleyen kanallar burada
+
+bot.use(async (ctx, next) => {
+    // Sadece özel mesajlaşmalarda kontrol et
+    if (ctx.chat && ctx.chat.type === 'private') {
+        let missingChannels = [];
+
+        for (const channel of REQUIRED_CHANNELS) {
+            try {
+                const member = await ctx.telegram.getChatMember(channel, ctx.from.id);
+                // Eğer üye değilse (left, kicked) listeye ekle
+                if (!['creator', 'administrator', 'member', 'restricted'].includes(member.status)) {
+                    missingChannels.push(channel);
+                }
+            } catch (error) {
+                console.error(`❌ ${channel} üyelik kontrolünde hata (Bot kanalda admin mi?):`, error.message);
+                missingChannels.push(channel); // Admin değilse veya test ortamıysa güvenlik riski için üye değil say
+            }
+        }
+        
+        // Eğer abone olunmamış kanallar varsa engelle ve butonları dinamik oluştur
+        if (missingChannels.length > 0) {
+            const buttons = missingChannels.map(ch => 
+                [{ text: `📣 ${ch} Kanalına Katıl`, url: `https://t.me/${ch.replace('@', '')}` }]
+            );
+
+            return ctx.reply(
+                "🛑 <b>Dur bakalım! Yasin Hoca'nın derslerine katılmadan önce küçük bir şartım var.</b>\n\n" +
+                `Ücretsiz Kelime Avı uygulamasını ve benimle sohbet edebilme özelliğini kullanmak için ` +
+                `lütfen önce aşağıdaki resmi kanallarımıza abone ol.\n\nKanallara katılıp tekrar /start yazarak başlayabilirsin!`,
+                {
+                    parse_mode: "HTML",
+                    reply_markup: {
+                        inline_keyboard: buttons
+                    }
+                }
+            );
+        }
+    }
+    
+    // Tüm kanallara aboneyse devam et
+    return next();
+});
+
 bot.command('post', async (ctx) => {
     if (ctx.from.id.toString() === "6429306893" || ctx.from.id.toString() === "7360824809" || ctx.from.username === "k_yasin") { 
         const topic = ctx.message.text.split(' ').slice(1).join(' '); 
@@ -403,6 +456,7 @@ bot.start(async (ctx) => {
     ctx.reply(`Hoş Geldin ${ctx.from.first_name}! 👋\n\nBen Yasin Hoca! İstanbul Türkçesini mükemmel şekilde konuşan, son derece kültürlü ve disiplinli bir Türkçe öğretmeniyim. Dersimize hazırsan aşağıdaki menüden çalışmayı başlatabilirsin.`, 
     Markup.keyboard([
         [Markup.button.webApp("🚀 Mini Uygulama (Kelime Avı)", `${miniAppUrl}?uid=${ctx.from.id}`)],
+        ["📚 Eğitim Kitapları"],
         ["🎙 Telaffuz Pratiği Yap", "☕ Serbest Sohbet Et"]
     ]).resize());
 });
@@ -417,33 +471,56 @@ function sendDailyReminders() {
 }
 
 async function postToChannel(topic = "", fileId = null, fileType = "photo") {
-    const channelId = process.env.CHANNEL_ID;
-    if (!channelId) return;
+    const channelId = "@turkishly"; // Sadece @turkishly kanalına gönderilecek şekilde ayarlandı
 
     try {
         const selectedTopic = topic || "Genel Türkçe Dil Bilgisi";
+        // Kullanıcı "detaylı" istiyorsa kilitleri aç
         const isDetailed = /detaylı|uzun|geniş|açıklayıcı|anlat|bilgi|nedir|öğret|notlar/i.test(selectedTopic);
         
-        const comp = await openai.chat.completions.create({
-            model: "llama-3.3-70b-versatile",
-            messages: [
-                { role: "system", content: `Sen Yasin Hoca'sın. Her zaman şu şık formatla başla:
+        // --- 1. ÖZBEKÇE ÖĞRETMEN MANTIĞI ---
+        const isUzbek = /özbekçe|ozbekce|uzbek|o'zbek/i.test(selectedTopic);
+        let systemPrompt = "";
+
+        if (isUzbek) {
+            systemPrompt = `Sen anadili Özbekçe olan, mükemmel bir Türkçe öğretmenisin. Özbek öğrencilerine Türkçeyi en anlaşılır şekilde, iki dil arasındaki benzerlikleri ve farklılıkları da göstererek (ve gramer kurallarını Özbek dilindeki mantıkla kıyaslayarak) öğretiyorsun. 
+Konuyu *Özbekçe* (Latin alfabesiyle) anlatmalısın. Sadece Türkçe kelime ve örnekleri verirken Türkçe kullan. Çok samimi, sıcak ve öğrencilerini teşvik edici bir öğretmen tonu kullan. 
+Gönderilerin şu şık formatla başlamalı:
+🇺🇿🇹🇷 <b>Turk Tili Darslari</b>
+
+🌟 <b>[Telegram Kanalidagi Mavzu]</b> 🌟
+
+(İçeriği Özbekçe ve son derece kaliteli, HTML (<b>, <i>) etiketli metinlerle hazırla. Çarpıcı 2-3 hashtag ekle.)`;
+        } else {
+            // Yasin Hoca (Türkçe) Konsepti
+            systemPrompt = `Sen Yasin Hoca'sın. Her zaman şu şık formatla başla:
 🏛️ <b>Yasin Hoca'dan Türkçe Notları</b>
 
 🌟 <b>[Konu Başlığı]</b> 🌟
 
 İçerik kuralları:
 1. Son derece zarif, profesyonel ve yüksek seviyede bir 'kanal vizyonu' olan üslup kullan. "Değerli öğrencilerim," veya "Kıymetli arkadaşlar," gibi saygın bir hitapla başla.
-2. ASLA ama ASLA Türkçe dışında bir kelime veya Latin alfabesi dışı (Arapça, Farsça, Kiril vb.) bir karakter kullanma. Metin %100 temiz, duru ve hatasız bir İstanbul Türkçesi olmalıdır.
+2. ASLA ama ASLA Türkçe dışında bir kelime veya Latin alfabesi dışı karakter kullanma. Metin %100 temiz, duru ve hatasız bir İstanbul Türkçesi olmalıdır.
 3. Emojileri ciddi oranda azalt. Sadece başlıklar veya çok önemli vurgular için sembolik ve seçkin bir şekilde kullan. Her cümlede emoji olmasın.
 4. Bilgiyi derin, akademik bir altyapıyla ama akıcı ve ilgi çekici bir üslupla sun. Başka hiçbir kanalda bulunmayan bir kalite ve derinlik hissi ver.
-5. Metin düzeni tertemiz ve dengeli olmalı. HTML (<b>, <i>, <u>) kullanarak profesyonel bir tipografi oluştur. En sona 2-3 hashtag ekle.` },
+5. Metin düzeni tertemiz ve dengeli olmalı. HTML (<b>, <i>, <u>) kullanarak profesyonel bir tipografi oluştur. En sona 2-3 hashtag ekle.`;
+        }
+
+        // --- 2. ANKET (POLL) GÖNDERME KONTROLÜ ---
+        const wantsPoll = /anket|quiz|test/i.test(selectedTopic);
+
+        // Ana Post'u Oluştur
+        const comp = await openai.chat.completions.create({
+            model: "llama-3.3-70b-versatile",
+            messages: [
+                { role: "system", content: systemPrompt },
                 { role: "user", content: `Öğrencilerine şu konuyu anlat: ${selectedTopic}` }
             ],
             temperature: 0.8
         });
         const text = comp.choices[0].message.content;
 
+        // Post'u Kanala Gönder
         if (fileId) {
             if (isDetailed || text.length > 1024) {
                if (fileType === "document") await bot.telegram.sendDocument(channelId, fileId);
@@ -456,26 +533,88 @@ async function postToChannel(topic = "", fileId = null, fileType = "photo") {
         } else {
             await bot.telegram.sendMessage(channelId, text, { parse_mode: 'HTML' });
         }
+        console.log(`✅ Kanal postu başarıyla paylaşıldı! (Özbekçe: ${isUzbek ? "Evet" : "Hayır"})`);
+
+        // --- 3. ANKET/TEST GÖNDERME (YAPAY ZEKA İLE JSON) ---
+        if (wantsPoll) {
+            console.log("📝 Kanala anket/quiz hazırlanıyor...");
+            const pollComp = await openai.chat.completions.create({
+                model: "llama-3.3-70b-versatile",
+                response_format: { type: "json_object" },
+                messages: [
+                    { 
+                        role: "system", 
+                        content: `Sen bir Telegram anket (quiz) oluşturucusun. Kullanıcının işlediği ve anlattığı bu Türkçe dilbilgisi konusunu test etmek için ÇOK ZEKİ 1 soruluk bir quiz hazırla. Çıktı SADECE geçerli bir JSON objesi olmalıdır.
+JSON Şablonu:
+{
+  "question": "Soru metni (en fazla 250 karakter)",
+  "options": ["A şıkkı metni", "B şıkkı metni", "C şıkkı metni", "D şıkkı metni"],
+  "correct_option_id": 0, // Bu rakam 0 (A şıkkı), 1 (B şıkkı), 2 (C şıkkı), 3 (D şıkkı) doğruysa ona göre verilir.
+  "explanation": "Öğrenci yanlış cevaplarsa Telegram'da havaya kalkan ufak bilgi (190 karakteri ASLA aşma!)"
+}`
+                    },
+                    { 
+                        role: "user", 
+                        content: `Konumuz: ${selectedTopic}. Öğrencilere bu yönde bir mini sınav ver. 
+DİL UYARISI: Eğer üstteki konu ibaresinde 'Özbekçe' falan yazıyorsa, Quizin sorusunu ve explanation (açıklamasını) MUTLAKA Özbekçe (Latin alfabesiyle) hazırla! Fakat şıklar Türkçe olsun ki Türkçe test edilsin.` 
+                    }
+                ],
+                temperature: 0.5
+            });
+
+            const pollData = JSON.parse(pollComp.choices[0].message.content);
+            
+            // Telegram Quiz (Anket) Api İle Gönder (Soru için bot.telegram.sendPoll çağrılır)
+            await bot.telegram.sendPoll(channelId, pollData.question, pollData.options, {
+                type: 'quiz',
+                correct_option_id: pollData.correct_option_id,
+                explanation: pollData.explanation
+            });
+            console.log("✅ Anket kanala gönderildi!");
+        }
     } catch (e) {
-        console.error("❌ Kanal post hatası:", e.message);
+        console.error("❌ Kanal post/anket hatası:", e.message);
     }
 }
 
+// FOTOĞRAFLI YADA BELGELİ POST / PDF EKLEME KOMUTU
 bot.on(['photo', 'document'], async (ctx) => {
     if (ctx.from.id.toString() === "6429306893" || ctx.from.id.toString() === "7360824809" || ctx.from.username === "k_yasin") {
-        let topic = ctx.message.caption || "Genel Türkçe Bilgisi";
-        topic = topic.replace(/^\/post\s*/i, '').trim() || "Genel Türkçe Bilgisi";
-        let fileId; let type = "photo";
+        let topic = ctx.message.caption || "";
+        
+        let fileId;
+        let type = "photo";
+
         if (ctx.message.photo) {
-            fileId = ctx.message.photo[ctx.message.photo.length - 1].file_id; type = "photo";
-        } else if (ctx.message.document && ctx.message.document.mime_type.startsWith('image/')) {
-            fileId = ctx.message.document.file_id; type = "document";
+            fileId = ctx.message.photo[ctx.message.photo.length - 1].file_id;
+            type = "photo";
+        } else if (ctx.message.document) {
+            // Check if it's actually an image pretending to be a document or a PDF
+            fileId = ctx.message.document.file_id;
+            type = "document";
         } else {
-            return ctx.reply("❌ Lütfen sadece fotoğraf gönderin!");
+            return ctx.reply("❌ Lütfen sadece fotoğraf veya belge gönderin!");
         }
 
-        await ctx.reply(`📸 Görseliniz alındı! "${topic}" konusu özel ders tadında hazırlanıp kanala gönderiliyor...`);
-        await postToChannel(topic, fileId, type);
+        // --- PDF EKLEME (VERİTABANINA) ---
+        // Kullanım: `/addpdf istanbul ders a1`
+        if (topic.trim().toLowerCase().startsWith('/addpdf') && type === "document") {
+            const args = topic.trim().split(' ').filter(String).slice(1);
+            if (args.length !== 3) {
+                 return ctx.reply("❌ Hatalı kullanım! Lütfen şu formatta ayarlayın:\nPDF'i atarken açıklama kısmına yazın: `/addpdf <kitap:istanbul|yediiklim> <tür:ders|calisma> <seviye:a1|a2|b1|b2|c1>`", { parse_mode: "Markdown" });
+            }
+            const [book, bType, level] = args.map(a => a.toLowerCase());
+            const key = `${book}_${bType}_${level}`;
+            const pdfs = readPdfs();
+            pdfs[key] = fileId;
+            savePdfs(pdfs);
+            return ctx.reply(`✅ Harika! PDF dosyası başarıyla Telegram altyapısı ile veritabanına kaydedildi.\n\n📚 **Sistem Kaydı:** ${key}\nÖğrenciler menüden bu PDF'i anında 1 saniyede ücretsiz indirebilir.`);
+        }
+
+        // --- NORMAL /POST (KANALA YAYINLAMA) ---
+        let finalTopic = topic.replace(/^\/post\s*/i, '').trim() || "Genel Türkçe Dil Bilgisi";
+        await ctx.reply(`📸 Görseliniz/Dökümanınız alındı! "${finalTopic}" konusu özel ders tadında hazırlanıp sadece @turkishly kanalına gönderiliyor...`);
+        await postToChannel(finalTopic, fileId, type);
     } else {
         ctx.reply("❌ Post hazırlama yetkiniz bulunmuyor.");
     }
@@ -492,6 +631,86 @@ setInterval(() => {
 bot.hears('🎙 Telaffuz Pratiği Yap', (ctx) => ctx.reply("Harika! Telaffuz yeteneklerini geliştirelim. Lütfen aşağıdaki cümleyi sesli olarak oku:\n🎤 'Bugün hava çok güzel!'"));
 bot.hears('☕ Serbest Sohbet Et', (ctx) => ctx.reply("Serbest sohbet moduna geçtik. Seni dinliyorum; dilediğin konuda Türkçe olarak sohbet edebilirsin. 😊"));
 
+// --- KİTAP MENÜSÜ VE BUTON İŞLEMLERİ ---
+const BOOK_NAMES = { 'istanbul': 'Yeni İstanbul', 'yediiklim': 'Yedi İklim' };
+const TYPE_NAMES = { 'ders': 'Ders Kitabı', 'calisma': 'Çalışma Kitabı' };
+const LEVELS = ['a1', 'a2', 'b1', 'b2', 'c1'];
+
+bot.hears('📚 Eğitim Kitapları', async (ctx) => {
+    await ctx.reply("📚 Lütfen bilgisayarınıza veya telefonunuza ücretsiz indirmek istediğiniz kitap serisini seçin:", {
+        reply_markup: {
+            inline_keyboard: [
+                [{ text: "📘 Yeni İstanbul", callback_data: `pdfbook_istanbul` }, { text: "📗 Yedi İklim", callback_data: `pdfbook_yediiklim` }]
+            ]
+        }
+    });
+});
+
+bot.action(/pdfbook_(.+)/, async (ctx) => {
+    const book = ctx.match[1];
+    await ctx.editMessageText(`📚 **${BOOK_NAMES[book]}** serisini seçtin.\nLütfen indirmek istediğin kitabın türünü seç:`, {
+        parse_mode: "Markdown",
+        reply_markup: {
+            inline_keyboard: [
+                [{ text: "📖 Ders Kitabı", callback_data: `pdftype_${book}_ders` }, { text: "✍️ Çalışma Kitabı", callback_data: `pdftype_${book}_calisma` }],
+                [{ text: "🔙 Geri Dön", callback_data: "pdf_main_menu" }]
+            ]
+        }
+    });
+    ctx.answerCbQuery();
+});
+
+bot.action(/pdftype_(.+)_(.+)/, async (ctx) => {
+    const book = ctx.match[1];
+    const type = ctx.match[2];
+    
+    // Seviye butonlarını oluştur
+    const levelButtons = LEVELS.map(lvl => ({ text: `📈 ${lvl.toUpperCase()}`, callback_data: `pdflevel_${book}_${type}_${lvl}` }));
+    const keyboard = [];
+    for (let i = 0; i < levelButtons.length; i += 2) {
+        keyboard.push(levelButtons.slice(i, i + 2)); // Yan yana ikili yapmak için
+    }
+    keyboard.push([{ text: "🔙 Kitap Seçimine Dön", callback_data: "pdf_main_menu" }]);
+
+    await ctx.editMessageText(`📚 Mükemmel! Lütfen **${BOOK_NAMES[book]} ${TYPE_NAMES[type]}** için son olarak seviyeni (kurunu) seç:`, {
+        parse_mode: "Markdown",
+        reply_markup: { inline_keyboard: keyboard }
+    });
+    ctx.answerCbQuery();
+});
+
+bot.action(/pdflevel_(.+)_(.+)_(.+)/, async (ctx) => {
+    const book = ctx.match[1];
+    const type = ctx.match[2];
+    const level = ctx.match[3];
+    const key = `${book}_${type}_${level}`; // Örn: istanbul_ders_a1
+    
+    const pdfs = readPdfs();
+    const fileId = pdfs[key];
+    
+    ctx.answerCbQuery();
+    if (fileId) {
+        await ctx.editMessageText(`📥 **${BOOK_NAMES[book]} - ${TYPE_NAMES[type]} (${level.toUpperCase()})** dosyası hazırlanıyor...\nLütfen Telegram sunucularının hızı nedeniyle birkaç saniye bekleyin.`, { parse_mode: "Markdown"});
+        try {
+            await ctx.telegram.sendDocument(ctx.chat.id, fileId, { caption: `📚 ${BOOK_NAMES[book]} - ${TYPE_NAMES[type]} (${level.toUpperCase()})\nYasin Hoca'nın Resmi Dökümanı - İyi çalışmalar dilerim!` });
+        } catch (e) {
+             ctx.reply("❌ Dosya Telegram sunucusundan silinmiş veya bir hata oluştu. Lütfen Yasin Hoca'ya haber verin.");
+        }
+    } else {
+        await ctx.reply("❌ Üzgünüm! Bu kitabın PDF'i henüz sisteme Yasin Hoca tarafından yüklenmemiştir. Lütfen yetkiliye bildirin veya daha sonra tekrar deneyin.");
+    }
+});
+
+bot.action("pdf_main_menu", async (ctx) => {
+    await ctx.editMessageText("📚 Lütfen bilgisayarınıza veya telefonunuza ücretsiz indirmek istediğiniz kitap serisini seçin:", {
+        reply_markup: {
+            inline_keyboard: [
+                [{ text: "📘 Yeni İstanbul", callback_data: `pdfbook_istanbul` }, { text: "📗 Yedi İklim", callback_data: `pdfbook_yediiklim` }]
+            ]
+        }
+    });
+    ctx.answerCbQuery();
+});
 const SYSTEM_PROMPT = `Sen "Yasin Hoca" adında, İstanbul Türkçesini mükemmel ve hatasız konuşan, TDK kurallarına harfiyen uyan kıdemli bir Türkçe öğretmenisin. 
 Kuralların:
 1. Hitabetin beyefendi bir öğretmen tonunda olmalı. Herkese "Sen" diye hitap etmelisin. 
@@ -544,6 +763,73 @@ bot.on('text', async (ctx) => {
         ctx.telegram.editMessageText(ctx.chat.id, mid.message_id, null, `👨‍🏫 ${comp.choices[0].message.content}`);
     } catch (e) {
         console.error("❌ AI Hatası:", e.message);
+    }
+});
+
+// --- İNTERAKTİF SÖZLÜK (INLINE QUERY) ---
+const dictionaryCache = {};
+
+bot.on('inline_query', async (ctx) => {
+    const query = ctx.inlineQuery.query.trim().toLowerCase();
+    
+    // Eğer kişi henüz bir şey yazmadıysa veya tek harf yazdıysa bekle
+    if (query.length < 2) {
+        return ctx.answerInlineQuery([{
+            type: 'article',
+            id: 'info',
+            title: '🇹🇷🇺🇿 Akıllı Sözlük',
+            description: 'Çevirmek istediğiniz Türkçe kelimeyi yazın...',
+            thumbnail_url: 'https://cdn-icons-png.flaticon.com/512/3233/3233483.png',
+            input_message_content: { message_text: '💡 Sözlük kullanımı: Mektup yazdığınız yere `@SeninBotunAdi kelime` yazınız.', parse_mode: 'Markdown' }
+        }]);
+    }
+
+    try {
+        let resultData;
+
+        // Önce kendi belleğimize (cache) bakıyoruz. API israfını önler ve anında yanıt verir.
+        if (dictionaryCache[query]) {
+            resultData = dictionaryCache[query];
+        } else {
+            // Groq Yapay Zekadan Çeviri İste (JSON formatında)
+            const comp = await openai.chat.completions.create({
+                model: "llama-3.3-70b-versatile",
+                response_format: { type: "json_object" },
+                messages: [
+                    { 
+                        role: "system", 
+                        content: `Sen eşsiz ve akademik bir Türkçe-Özbekçe sözlüksün. Kullanıcının verdiği kelimenin Özbekçe baş çevirisini (Latin alfabesiyle) ve çok hoş tasarımlı HTML kartını hazırla. Çıktı SADECE JSON olmalıdır.
+JSON Şablonu:
+{
+  "uzbek": "Özbekçe çevirisi (örn: Qalam)",
+  "short_desc": "Kısaca türkçe veya özbekçe anlamı / çekimi",
+  "html_view": "🇹🇷 <b>[Türkçe]</b>\\n🇺🇿 <b>[Özbekçe Karşılığı]</b>\\n\\n📖 [Özenle seçilmiş, profesyonel bir Türkçe örnek cümle]\\n🇺🇿 [O cümlenin Özbekçe çevirisi]"
+}`
+                    },
+                    { role: "user", content: `Lütfen şu kelime/terimi mükemmel bir şekilde sözlüğe çevir: ${query}` }
+                ],
+                temperature: 0.2
+            });
+
+            resultData = JSON.parse(comp.choices[0].message.content);
+            dictionaryCache[query] = resultData; // Öğrenilmiş kelimeyi belleğe at
+        }
+
+        // Telegram'a Listeli Yanıt Fırlat (Kişinin klavyesinin üstünde pop-up çıkar)
+        await ctx.answerInlineQuery([{
+            type: 'article',
+            id: query,
+            title: `🇺🇿 ${resultData.uzbek}`,
+            description: resultData.short_desc,
+            thumbnail_url: 'https://cdn-icons-png.flaticon.com/512/3362/3362635.png',
+            input_message_content: {
+                message_text: `🏛️ <b>Yasin Hoca Lûgatı</b>\n\n${resultData.html_view}\n`,
+                parse_mode: 'HTML'
+            }
+        }], { cache_time: 86400 }); // Aynı aramayı Telegram 1 günlüğüne hatırlasın
+
+    } catch (error) {
+         console.error("❌ Inline query hatası:", error.message);
     }
 });
 
