@@ -359,7 +359,7 @@ async function startBot() {
         console.log("🤖 Bot başlatılıyor...");
         await bot.telegram.getMe(); 
         console.log("✅ Token geçerli, bot girişi yapıldı.");
-        const miniAppUrl = (process.env.MINI_APP_URL || '').replace(/\/+$/, '');
+        const miniAppUrl = (process.env.MINI_APP_URL || '').trim().replace(/\/+$/, '');
         if (miniAppUrl) {
             await bot.telegram.setChatMenuButton({
                 menu_button: { type: 'web_app', text: '🚀 Kelime Avı', web_app: { url: miniAppUrl } }
@@ -396,7 +396,7 @@ bot.command('post', async (ctx) => {
 
 bot.start(async (ctx) => {
     ensureUser('guest_user', ctx.chat.id); 
-    const miniAppUrl = (process.env.MINI_APP_URL || 'https://holes-green-euro-heavily.trycloudflare.com').replace(/\/+$/, '');
+    const miniAppUrl = (process.env.MINI_APP_URL || 'https://holes-green-euro-heavily.trycloudflare.com').trim().replace(/\/+$/, '');
     try {
         await ctx.telegram.setChatMenuButton({ menu_button: { type: 'web_app', text: '🚀 Kelime Avı', web_app: { url: `${miniAppUrl}?uid=${ctx.from.id}` } } });
     } catch (e) {}

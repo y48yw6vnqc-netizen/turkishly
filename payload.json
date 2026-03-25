@@ -1,0 +1,11 @@
+{
+  "chat_id": 7360824809,
+  "text": "Hoş Geldin! 👋\n\nBen Yasin Hoca! İstanbul Türkçesini mükemmel şekilde konuşan, son derece kültürlü ve disiplinli bir Türkçe öğretmeniyim. Dersimize hazırsan aşağıdaki menüden çalışmayı başlatabilirsin.",
+  "reply_markup": {
+    "keyboard": [
+      [{"text": "🚀 Mini Uygulama (Kelime Avı)", "web_app": {"url": "https://turkishly.onrender.com?uid=7360824809"}}],
+      [{"text": "🎙 Telaffuz Pratiği Yap"}, {"text": "☕ Serbest Sohbet Et"}]
+    ],
+    "resize_keyboard": true
+  }
+}
