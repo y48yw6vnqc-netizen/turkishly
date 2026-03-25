@@ -525,7 +525,7 @@ Gönderilerin şu şık formatla başlamalı:
 
         // Ana Post'u Oluştur
         const comp = await openai.chat.completions.create({
-            model: "llama-3.3-70b-versatile",
+            model: "llama-3.1-8b-instant",
             messages: [
                 { role: "system", content: systemPrompt },
                 { role: "user", content: `Öğrencilerine şu konuyu anlat: ${selectedTopic}` }
@@ -553,7 +553,7 @@ Gönderilerin şu şık formatla başlamalı:
         if (wantsPoll) {
             console.log("📝 Kanala anket/quiz hazırlanıyor...");
             const pollComp = await openai.chat.completions.create({
-                model: "llama-3.3-70b-versatile",
+                model: "llama-3.1-8b-instant",
                 response_format: { type: "json_object" },
                 messages: [
                     { 
@@ -746,7 +746,7 @@ bot.on('voice', async (ctx) => {
         await new Promise(r => writer.on('finish', r));
         const trans = await openai.audio.transcriptions.create({ file: fs.createReadStream(pathS), model: "whisper-large-v3", language: "tr" });
         const comp = await openai.chat.completions.create({
-            model: "llama-3.3-70b-versatile",
+            model: "llama-3.1-8b-instant",
             messages: [
                 { role: "system", content: SYSTEM_PROMPT },
                 { role: "user", content: trans.text }
@@ -767,7 +767,7 @@ bot.on('text', async (ctx) => {
     const mid = await ctx.reply('🤔 Düşünüyorum...');
     try {
         const comp = await openai.chat.completions.create({
-            model: "llama-3.3-70b-versatile",
+            model: "llama-3.1-8b-instant",
             messages: [
                 { role: "system", content: SYSTEM_PROMPT },
                 { role: "user", content: ctx.message.text }
@@ -811,7 +811,7 @@ bot.on('inline_query', async (ctx) => {
         } else {
             // Groq Yapay Zekadan Çift Yönlü Çeviri İste (JSON formatında)
             const comp = await openai.chat.completions.create({
-                model: "llama-3.3-70b-versatile",
+                model: "llama-3.1-8b-instant",
                 response_format: { type: "json_object" },
                 messages: [
                     { 
@@ -850,6 +850,7 @@ JSON Şablonu:
 
     } catch (error) {
          console.error("❌ Inline query hatası:", error.message);
+         try { await ctx.answerInlineQuery([]); } catch(e) {}
     }
 });
 
