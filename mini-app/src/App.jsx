@@ -47,6 +47,23 @@ function App() {
   const [newLevel, setNewLevel] = useState('A1');
   const [newStep, setNewStep] = useState(1);
   const [editingWord, setEditingWord] = useState(null); // Kelime düzenleme için
+  const [adminViewLevel, setAdminViewLevel] = useState('A1');
+  const [adminViewStep, setAdminViewStep] = useState(1);
+  const [adminSearch, setAdminSearch] = useState('');
+  const [adminWords, setAdminWords] = useState([]);
+
+  useEffect(() => {
+    if (view === 'admin-panel') {
+       const fetchAdminWords = async () => {
+         try {
+           const res = await fetch(`/api/words?level=${adminViewLevel}&step=${adminViewStep}`);
+           const data = await res.json();
+           setAdminWords(data);
+         } catch(e) {}
+       };
+       fetchAdminWords();
+    }
+  }, [view, adminViewLevel, adminViewStep]);
 
   const [availableVoices, setAvailableVoices] = useState([]);
 
@@ -638,19 +655,26 @@ function App() {
   } else if (view === 'admin-panel') {
     viewContent = (
       <div className="view-container admin-panel">
-        <header className="view-header"><button className="back-btn" onClick={() => setView('main-choice')}><Layout /> Menü</button><h2>Admin</h2></header>
-        
+        <header className="view-header">
+           <button className="back-btn" onClick={() => setView('main-choice')}><ArrowLeft /> Geri</button>
+           <h2>Panel: {adminMode === 'words' ? 'Kelimeler' : 'Konular'}</h2>
+           <div></div>
+        </header>
+
         <div className="admin-tabs">
           <button className={`tab-btn ${adminMode === 'words' ? 'active' : ''}`} onClick={() => setAdminMode('words')}>Kelimeler</button>
-          <button className={`tab-btn ${adminMode === 'subjects' ? 'active' : ''}`} onClick={() => setAdminMode('subjects')}>Konular</button>
+          <button className={`tab-btn ${adminMode === 'subjects' ? 'active' : ''}`} onClick={() => setAdminMode('subjects')}>Konu Anlatımı</button>
         </div>
 
         {adminMode === 'words' ? (
           <>
             <div className="add-word-form glass-panel">
-              <input placeholder="TR" value={newTr} onChange={e => setNewTr(e.target.value)} className="glass-input" />
-              <input placeholder="UZ" value={newUz} onChange={e => setNewUz(e.target.value)} className="glass-input" />
-              <textarea placeholder="Örnek Metin" value={newEx} onChange={e => setNewEx(e.target.value)} className="glass-input" />
+              <h3 className="form-title"><Plus size={18}/> Yeni Kelime Ekle</h3>
+              <div className="input-grid">
+                <input placeholder="Türkçe" value={newTr} onChange={e => setNewTr(e.target.value)} className="glass-input" />
+                <input placeholder="Özbekçe" value={newUz} onChange={e => setNewUz(e.target.value)} className="glass-input" />
+              </div>
+              <textarea placeholder="Örnek Cümle..." value={newEx} onChange={e => setNewEx(e.target.value)} className="glass-input" />
               <div className="admin-grid">
                 <select className="glass-input" value={newLevel} onChange={e => setNewLevel(e.target.value)}>
                     {LEVELS.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
@@ -659,20 +683,37 @@ function App() {
                     {STEPS.map(s => <option key={s} value={s}>{s}. Adım</option>)}
                 </select>
               </div>
-              <button onClick={addWord} className="glass-btn primary"><Plus /> Kart Ekle</button>
+              <button onClick={async () => { await addWord(); fetchWords(adminViewLevel, adminViewStep); }} className="glass-btn primary"><Plus /> Kartı Ekle</button>
             </div>
+
+            <div className="filter-section glass-panel">
+               <h3 className="form-title"><Layout size={18}/> Mevcut Kartları Listele</h3>
+               <div className="admin-grid">
+                  <select className="glass-input" value={adminViewLevel} onChange={e => setAdminViewLevel(e.target.value)}>
+                      {LEVELS.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
+                  </select>
+                  <select className="glass-input" value={adminViewStep} onChange={e => setAdminViewStep(e.target.value)}>
+                      {STEPS.map(s => <option key={s} value={s}>{s}. Adım</option>)}
+                  </select>
+               </div>
+               <input placeholder="Hızlı ara..." value={adminSearch} onChange={e => setAdminSearch(e.target.value)} className="glass-input" style={{marginTop: '10px'}}/>
+            </div>
+
             <div className="words-list">
-                {allLevelWords.map(c => (
+                {adminWords.filter(w => w.tr.toLowerCase().includes(adminSearch.toLowerCase()) || w.uz.toLowerCase().includes(adminSearch.toLowerCase())).map(c => (
                     <div key={c.id} className="word-item glass-panel">
                         <div className="word-info">
-                            <span><span className="lvl-badge">Adım {c.step}</span> {c.tr} - {c.uz}</span>
+                            <span className="w-tr">{c.tr}</span>
+                            <span className="w-arrow">→</span>
+                            <span className="w-uz">{c.uz}</span>
                         </div>
                         <div className="admin-actions">
                             <button onClick={() => setEditingWord(c)} className="edit-btn">Düzenle</button>
-                            <button onClick={() => deleteWord(c.id)} className="delete-btn"><Trash2 size={16} /></button>
+                            <button onClick={async () => { await deleteWord(c.id); setAdminWords(prev => prev.filter(w => w.id !== c.id)); }} className="delete-btn"><Trash2 size={16} /></button>
                         </div>
                     </div>
                 ))}
+                {adminWords.length === 0 && <p className="empty-msg">Bu adımda henüz kelime yok.</p>}
             </div>
           </>
         ) : (

@@ -3598,5 +3598,355 @@
     "uz": "Syurpriz",
     "level": "A1",
     "step": 20
+  },
+  {
+    "id": "a2-s1-0",
+    "tr": "Öfkeli",
+    "uz": "G'azablangan",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-1",
+    "tr": "Kıskanç",
+    "uz": "Hasadgo'y",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-2",
+    "tr": "Cömert",
+    "uz": "Saxovatli",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-3",
+    "tr": "Cimri",
+    "uz": "Xasis",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-4",
+    "tr": "Yalnız",
+    "uz": "Yolg'iz",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-5",
+    "tr": "Neşeli",
+    "uz": "Quvnoq",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-6",
+    "tr": "Endişeli",
+    "uz": "Xavotirda",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-7",
+    "tr": "Umutlu",
+    "uz": "Umidvor",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-8",
+    "tr": "Hayal kırıklığı",
+    "uz": "Umid uzilishi",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-9",
+    "tr": "İnatçı",
+    "uz": "O'jar",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-10",
+    "tr": "Sabırlı",
+    "uz": "Sabr-toqatli",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-11",
+    "tr": "Utangaç",
+    "uz": "Uyalchoq",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-12",
+    "tr": "Özgüven",
+    "uz": "O'ziga ishonch",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-13",
+    "tr": "Sıradan",
+    "uz": "Oddiy",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-14",
+    "tr": "Özel",
+    "uz": "Maxsus",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-15",
+    "tr": "Heyecan",
+    "uz": "Hayajon",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-16",
+    "tr": "Korku",
+    "uz": "Qo'rqinch",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-17",
+    "tr": "Şaşkınlık",
+    "uz": "Hayron qolish",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-18",
+    "tr": "Özlem",
+    "uz": "Sog'inch",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-19",
+    "tr": "Sıkıntı",
+    "uz": "Qiyinchilik (Siqilish)",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-20",
+    "tr": "Huzur",
+    "uz": "Hotirjamlik",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-21",
+    "tr": "Zevk",
+    "uz": "Lazzat",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-22",
+    "tr": "Nefret",
+    "uz": "Nafrat",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-23",
+    "tr": "Sevgi",
+    "uz": "Sevgi",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s1-24",
+    "tr": "Güven",
+    "uz": "Ishonch",
+    "level": "A2",
+    "step": 1
+  },
+  {
+    "id": "a2-s2-25",
+    "tr": "Keşfetmek",
+    "uz": "Kashf qilmoq",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-26",
+    "tr": "Konaklamak",
+    "uz": "Joylashmoq",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-27",
+    "tr": "Manzara",
+    "uz": "Manzara",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-28",
+    "tr": "Rehber",
+    "uz": "Gid",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-29",
+    "tr": "Rota",
+    "uz": "Yo'nalish",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-30",
+    "tr": "Valiz",
+    "uz": "Chamadon",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-31",
+    "tr": "Uçak",
+    "uz": "Samolyot",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-32",
+    "tr": "Havalimanı",
+    "uz": "Aeroport",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-33",
+    "tr": "Pasaport",
+    "uz": "Pasport",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-34",
+    "tr": "Vize",
+    "uz": "Viza",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-35",
+    "tr": "Bilet",
+    "uz": "Chipta",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-36",
+    "tr": "Tren",
+    "uz": "Poyezd",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-37",
+    "tr": "Otobüs",
+    "uz": "Avtobus",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-38",
+    "tr": "Gemi",
+    "uz": "Kema",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-39",
+    "tr": "Turist",
+    "uz": "Sayyoh",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-40",
+    "tr": "Yerel",
+    "uz": "Mahalliy",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-41",
+    "tr": "Yurt dışı",
+    "uz": "Chet el",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-42",
+    "tr": "Müze",
+    "uz": "Muzey",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-43",
+    "tr": "Sergi",
+    "uz": "Ko'rgazma",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-44",
+    "tr": "Anı",
+    "uz": "Xotira",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-45",
+    "tr": "Gezgin",
+    "uz": "Sayyoh (Sayohat qiluvchi)",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-46",
+    "tr": "Harita",
+    "uz": "Xarita",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-47",
+    "tr": "Hediyelik",
+    "uz": "Sovg'abop",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-48",
+    "tr": "Kamp",
+    "uz": "Lager",
+    "level": "A2",
+    "step": 2
+  },
+  {
+    "id": "a2-s2-49",
+    "tr": "Piknik",
+    "uz": "Piknik",
+    "level": "A2",
+    "step": 2
   }
 ]
