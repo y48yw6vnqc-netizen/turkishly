@@ -222,10 +222,26 @@ body {
   align-items: center; padding: 40px; text-align: center;
   border-radius: 40px; border: 3px solid var(--glass-border-bright);
   box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+  /* Force GPU rendering for smoother performance on Android */
+  transform: translateZ(0); 
+  -webkit-transform: translateZ(0);
 }
 
-.card-front { background: #1e1b4b; background: linear-gradient(135deg, #1e1b4b 0%, #171539 100%); border: 2px solid var(--primary); }
-.card-back { background: #312e81; background: linear-gradient(135deg, #312e81 0%, #1e1b4b 100%); transform: rotateY(180deg); border: 2px solid var(--secondary); }
+.card-front { 
+  background: #1e1b4b; 
+  background: linear-gradient(135deg, #1e1b4b 0%, #171539 100%); 
+  border: 2px solid var(--primary); 
+  z-index: 2;
+}
+
+.card-back { 
+  background: #312e81; 
+  background: linear-gradient(135deg, #312e81 0%, #1e1b4b 100%); 
+  transform: rotateY(180deg) translateZ(1px); 
+  -webkit-transform: rotateY(180deg) translateZ(1px);
+  border: 2px solid var(--secondary); 
+  z-index: 1;
+}
 
 .card-front h2 {
   font-size: 3.2rem; font-weight: 800; color: white;
@@ -393,9 +409,17 @@ body {
   opacity: 0.5;
 }
 
-.lesson-content { padding: 24px; margin-bottom: 30px; border-radius: 32px; }
-.lesson-text { line-height: 1.8; font-size: 1.05rem; color: #cbd5e1; }
-.lesson-divider { height: 1px; background: var(--glass-border); margin: 30px 0; }
-.lesson-text br { margin-bottom: 12px; display: block; content: ""; }
+/* --- EDIT MODAL --- */
+.edit-modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+  display: flex; align-items: center; justify-content: center; z-index: 2000;
+  padding: 20px;
+}
+.edit-modal { width: 100%; max-width: 400px; padding: 30px; display: flex; flex-direction: column; gap: 15px; }
+.admin-actions { display: flex; gap: 10px; align-items: center; }
+.edit-btn { background: var(--primary); color: white; border: none; padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; cursor: pointer; }
+.modal-btns { display: flex; gap: 10px; }
+.glass-btn.mini { padding: 10px; font-size: 0.9rem; }
 
 

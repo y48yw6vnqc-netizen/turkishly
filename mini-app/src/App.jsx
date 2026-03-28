@@ -11,7 +11,7 @@ const LEVELS = [
   { id: 'C1', name: 'C1 - Akıcı', icon: '🎓' }
 ];
 
-const STEPS = [1, 2, 3, 4, 5];
+const STEPS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
 function App() {
   const [view, setView] = useState('main-choice'); 
@@ -46,15 +46,27 @@ function App() {
   const [newEx, setNewEx] = useState('');
   const [newLevel, setNewLevel] = useState('A1');
   const [newStep, setNewStep] = useState(1);
+  const [editingWord, setEditingWord] = useState(null); // Kelime düzenleme için
 
   const [availableVoices, setAvailableVoices] = useState([]);
 
   useEffect(() => {
     const handleVoices = () => {
-      setAvailableVoices(window.speechSynthesis.getVoices());
+      const voices = window.speechSynthesis.getVoices();
+      if (voices.length > 0) {
+        setAvailableVoices(voices);
+      }
     };
-    window.speechSynthesis.onvoiceschanged = handleVoices;
+    
+    // Some browsers wait for a user gesture or take time to load voices
+    if (window.speechSynthesis.onvoiceschanged !== undefined) {
+      window.speechSynthesis.onvoiceschanged = handleVoices;
+    }
+    
     handleVoices();
+    // Re-check after a short delay for browsers like Chrome/Android
+    setTimeout(handleVoices, 500);
+    setTimeout(handleVoices, 2000);
   }, []);
 
   useEffect(() => {
@@ -299,6 +311,21 @@ function App() {
     } catch (err) { console.error(err); }
   };
 
+  const updateWord = async () => {
+    if (!editingWord.tr || !editingWord.uz) return;
+    try {
+      const res = await fetch(`/api/words/${editingWord.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...editingWord, password: adminPassword })
+      });
+      if (res.ok) {
+        setEditingWord(null);
+        fetchWords(level, step);
+      }
+    } catch (err) { console.error(err); }
+  };
+
   const [newSubTitle, setNewSubTitle] = useState('');
   const [newSubContent, setNewSubContent] = useState('');
   const [newQText, setNewQText] = useState('');
@@ -397,25 +424,43 @@ function App() {
   };
 
   const playAudio = (e, text) => {
-    e.stopPropagation();
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'tr-TR';
-      const voices = window.speechSynthesis.getVoices();
-      const trVoices = voices.filter(v => v.lang.toLowerCase().includes('tr'));
-      const maleNames = ['cem', 'tolga', 'sinan', 'yasin', 'tevfik', 'erkek', 'male', 'google türkçe'];
-      let selectedVoice = null;
-      for (const name of maleNames) {
-        selectedVoice = trVoices.find(v => v.name.toLowerCase().includes(name));
-        if (selectedVoice) break;
+    if (e) e.stopPropagation();
+    
+    if (!text) return;
+
+    // First, try consistent high-quality fallback: Google Translate TTS (Reliable on all platforms)
+    // This solves the "English accent on Android/PC" problem because it's a server-side voice
+    const googleTtsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=tr-TR&client=tw-ob&q=${encodeURIComponent(text)}`;
+    const audio = new Audio(googleTtsUrl);
+    
+    audio.play().catch(err => {
+      console.warn("Google TTS failed, falling back to local speech engine:", err);
+      // Fallback to local SpeechSynthesis if Google TTS is blocked
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'tr-TR';
+        
+        const voices = window.speechSynthesis.getVoices();
+        const trVoices = voices.filter(v => v.lang.toLowerCase().includes('tr'));
+        
+        // Priority: Native Turkish voices or Google Turkish
+        const maleNames = ['google türkçe', 'cem', 'tolga', 'sinan', 'yasin', 'tevfik', 'erkek', 'male'];
+        let selectedVoice = null;
+        
+        for (const name of maleNames) {
+          selectedVoice = trVoices.find(v => v.name.toLowerCase().includes(name));
+          if (selectedVoice) break;
+        }
+        
+        if (!selectedVoice && trVoices.length > 0) selectedVoice = trVoices[0];
+        if (selectedVoice) utterance.voice = selectedVoice;
+        
+        utterance.rate = 0.95;
+        utterance.pitch = 1.0; 
+        window.speechSynthesis.speak(utterance);
       }
-      if (!selectedVoice && trVoices.length > 0) selectedVoice = trVoices[0];
-      if (selectedVoice) utterance.voice = selectedVoice;
-      utterance.rate = 0.9;
-      utterance.pitch = 1.0; 
-      window.speechSynthesis.speak(utterance);
-    }
+    });
   };
 
   let viewContent;
@@ -622,7 +667,10 @@ function App() {
                         <div className="word-info">
                             <span><span className="lvl-badge">Adım {c.step}</span> {c.tr} - {c.uz}</span>
                         </div>
-                        <button onClick={() => deleteWord(c.id)} className="delete-btn"><Trash2 size={16} /></button>
+                        <div className="admin-actions">
+                            <button onClick={() => setEditingWord(c)} className="edit-btn">Düzenle</button>
+                            <button onClick={() => deleteWord(c.id)} className="delete-btn"><Trash2 size={16} /></button>
+                        </div>
                     </div>
                 ))}
             </div>
@@ -675,6 +723,21 @@ function App() {
                   )}
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+
+        {editingWord && (
+          <div className="edit-modal-overlay">
+            <div className="edit-modal glass-panel">
+              <h3>Kartı Düzenle</h3>
+              <input value={editingWord.tr} onChange={e => setEditingWord({...editingWord, tr: e.target.value})} className="glass-input" placeholder="Türkçe" />
+              <input value={editingWord.uz} onChange={e => setEditingWord({...editingWord, uz: e.target.value})} className="glass-input" placeholder="Özbekçe" />
+              <textarea value={editingWord.example} onChange={e => setEditingWord({...editingWord, example: e.target.value})} className="glass-input" placeholder="Örnek Cümle" />
+              <div className="modal-btns">
+                <button onClick={updateWord} className="glass-btn primary mini">Güncelle</button>
+                <button onClick={() => setEditingWord(null)} className="glass-btn secondary mini">İptal</button>
+              </div>
             </div>
           </div>
         )}

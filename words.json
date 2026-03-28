@@ -1,164 +1,3602 @@
 [
   {
-    "id": "rpuhxkj4r",
-    "tr": "Babaanne",
-    "uz": "Buvi ( otaning onasi)",
-    "example": "Babaannemiz çok iyi bir kadın",
+    "id": "a1s1-1",
+    "tr": "Merhaba",
+    "uz": "Salom",
+    "example": "Merhaba, nasılsın?",
     "level": "A1",
-    "createdAt": "2026-03-18T17:24:39.821Z",
     "step": 1
   },
   {
-    "id": "3w161kp4c",
-    "tr": "Teyze ",
-    "uz": "Xola",
-    "example": "Bu teyzen annenin kiz kardeşi mi?",
+    "id": "a1s1-2",
+    "tr": "Günaydın",
+    "uz": "Xayrli tong",
+    "example": "Günaydın anneciğim.",
     "level": "A1",
-    "createdAt": "2026-03-18T17:22:47.372Z",
     "step": 1
   },
   {
-    "id": "i5ujrx8b2",
+    "id": "a1s1-3",
+    "tr": "İyi günler",
+    "uz": "Xayrli kun",
+    "example": "Size de iyi günler efendim.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-4",
+    "tr": "İyi akşamlar",
+    "uz": "Xayrli kech",
+    "example": "İyi akşamlar, hoş geldiniz.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-5",
+    "tr": "İyi geceler",
+    "uz": "Xayrli tun",
+    "example": "Yarın görüşürüz, iyi geceler.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-6",
+    "tr": "Nasılsın?",
+    "uz": "Qalaysiz? (Yaxshimisiz?)",
+    "example": "Nasılsın? Her şey yolunda mı?",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-7",
+    "tr": "Teşekkür ederim",
+    "uz": "Rahmat",
+    "example": "Yardımınız için teşekkür ederim.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-8",
+    "tr": "Lütfen",
+    "uz": "Iltimos",
+    "example": "Lütfen buraya oturun.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-9",
+    "tr": "Özür dilerim",
+    "uz": "Kechirasiz (Uzr)",
+    "example": "Geç kaldığım için özür dilerim.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-10",
+    "tr": "Hoşça kalın",
+    "uz": "Xayr (Salomat bo'ling)",
+    "example": "Şimdi gitmem lazım, hoşça kalın.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-11",
+    "tr": "Evet",
+    "uz": "Ha",
+    "example": "Evet, ben de geliyorum.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-12",
+    "tr": "Hayır",
+    "uz": "Yo'q",
+    "example": "Hayır, henüz hazır değilim.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-13",
+    "tr": "Tamam",
+    "uz": "Mayli (Bo'ladi)",
+    "example": "Tamam, anlaştık.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-14",
+    "tr": "Ben",
+    "uz": "Men",
+    "example": "Ben bir öğrenciyim.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-15",
+    "tr": "Sen",
+    "uz": "Sen",
+    "example": "Sen de bizimle geliyor musun?",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-16",
+    "tr": "O",
+    "uz": "U",
+    "example": "O, benim en yakın arkadaşım.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-17",
+    "tr": "Biz",
+    "uz": "Biz",
+    "example": "Biz yarın İstanbul'a gidiyoruz.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-18",
+    "tr": "Siz",
+    "uz": "Siz",
+    "example": "Siz nerelisiniz?",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-19",
+    "tr": "Onlar",
+    "uz": "Ular",
+    "example": "Onlar bahçede oyun oynuyorlar.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-20",
+    "tr": "Ad",
+    "uz": "Ism (Ot)",
+    "example": "Senin adın ne?",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-21",
+    "tr": "Memnun oldum",
+    "uz": "Tanishganimdan xursandman",
+    "example": "Tanıştığımıza çok memnun oldum.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-22",
+    "tr": "Afiyet olsun",
+    "uz": "Yoqimli ishtaha",
+    "example": "Yemek çok lezzetli, afiyet olsun.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-23",
+    "tr": "Görüşürüz",
+    "uz": "Ko'rishguncha",
+    "example": "Yarın okulda görüşürüz.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-24",
+    "tr": "Hoş geldiniz",
+    "uz": "Xush kelibsiz",
+    "example": "Hoş geldiniz, nasılsınız?",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s1-25",
+    "tr": "Anladım",
+    "uz": "Tushundim",
+    "example": "Şimdi konuyu çok iyi anladım.",
+    "level": "A1",
+    "step": 1
+  },
+  {
+    "id": "a1s2-1",
     "tr": "Anne",
-    "uz": "Ona (oyi)",
-    "example": "Annem hayatımın anlamı",
+    "uz": "Ona (Oyi)",
+    "example": "Annem çok güzel yemek yapar.",
     "level": "A1",
-    "createdAt": "2026-03-18T17:20:25.080Z",
-    "step": 1
+    "step": 2
   },
   {
-    "id": "cnlhxj2cm",
-    "tr": "Hala ",
-    "uz": "Amma",
-    "example": "Bu büyük halam babamın ablası",
-    "level": "A1",
-    "createdAt": "2026-03-18T17:19:08.472Z",
-    "step": 1
-  },
-  {
-    "id": "b3dv20g5f",
+    "id": "a1s2-2",
     "tr": "Baba",
-    "uz": "Dada",
-    "example": "Babam Dünya’deki en iyi baba",
+    "uz": "Ota (Dada)",
+    "example": "Babam akşam işten geç döner.",
     "level": "A1",
-    "createdAt": "2026-03-18T16:19:22.185Z",
-    "step": 1
+    "step": 2
   },
   {
-    "id": "jx8atu6sv",
-    "tr": "Az",
-    "uz": "Oz",
-    "example": "Bugün arabalar çok az",
+    "id": "a1s2-3",
+    "tr": "Ev",
+    "uz": "Uy",
+    "example": "Bu ev bizim yeni evimiz.",
     "level": "A1",
-    "createdAt": "2026-03-18T16:17:42.238Z",
-    "step": 1
+    "step": 2
   },
   {
-    "id": "klbahwk75",
-    "tr": "Asya",
-    "uz": "Osiyo",
-    "example": "Asya kıtası",
+    "id": "a1s2-4",
+    "tr": "Kardeş",
+    "uz": "Uka (Singil)",
+    "example": "Benim iki kardeşim var.",
     "level": "A1",
-    "createdAt": "2026-03-18T16:17:09.985Z",
-    "step": 1
+    "step": 2
   },
   {
-    "id": "7ni0ttwyc",
-    "tr": "Avukat",
-    "uz": "Advakat",
-    "example": "Avukatım çok başarılı",
+    "id": "a1s2-5",
+    "tr": "Ablа",
+    "uz": "Opа",
+    "example": "Ablam üniversitede okuyor.",
     "level": "A1",
-    "createdAt": "2026-03-18T16:16:46.331Z",
-    "step": 1
+    "step": 2
   },
   {
-    "id": "ulpv6ygvt",
-    "tr": "Arap",
-    "uz": "Arab",
-    "example": "Arabistan’da araplar yaşıyor",
+    "id": "a1s2-6",
+    "tr": "Abi",
+    "uz": "Aka",
+    "example": "Abim askere gitti.",
     "level": "A1",
-    "createdAt": "2026-03-18T16:16:05.164Z",
-    "step": 1
+    "step": 2
   },
   {
-    "id": "gdp9bts89",
-    "tr": "Araba",
-    "uz": "Mashina ",
-    "example": "Arabalar çok hızlı",
+    "id": "a1s2-7",
+    "tr": "Dede",
+    "uz": "Bobo",
+    "example": "Dedem masal anlatmayı çok sever.",
     "level": "A1",
-    "createdAt": "2026-03-18T16:15:00.833Z",
-    "step": 1
+    "step": 2
   },
   {
-    "id": "amg6d2nt4",
-    "tr": "Almanya",
-    "uz": "Germanya",
-    "example": "Almanya Avrupa’daki bir şehir",
+    "id": "a1s2-8",
+    "tr": "Büyükanne",
+    "uz": "Buvi",
+    "example": "Büyükannem bize hediye almış.",
     "level": "A1",
-    "createdAt": "2026-03-18T16:13:59.126Z",
-    "step": 1
+    "step": 2
   },
   {
-    "id": "ix38bu7h5",
-    "tr": "Avrupa",
-    "uz": "Yevropa",
-    "example": "Avrupa kıtası ",
+    "id": "a1s2-9",
+    "tr": "Aile",
+    "uz": "Oila",
+    "example": "Biz çok büyük bir aileyiz.",
     "level": "A1",
-    "createdAt": "2026-03-18T16:13:28.796Z",
-    "step": 1
+    "step": 2
   },
   {
-    "id": "f8okhzv3c",
-    "tr": "Alkol",
-    "uz": "Spirtli ichimlik",
-    "example": "Alkol çok zararlı",
+    "id": "a1s2-10",
+    "tr": "Akraba",
+    "uz": "Qarindosh",
+    "example": "Tatilde tüm akrabalarımızı ziyaret ettik.",
     "level": "A1",
-    "createdAt": "2026-03-18T16:12:14.820Z",
-    "step": 1
+    "step": 2
   },
   {
-    "id": "5jnsjsz5z",
-    "tr": "Akşam",
-    "uz": "Oqshom (kech)",
-    "example": "Akşam arkadaşım gelir",
-    "level": "A1",
-    "createdAt": "2026-03-18T16:11:35.497Z",
-    "step": 1
-  },
-  {
-    "id": "62sx1y8yo",
-    "tr": "Ağustos ",
-    "uz": "Avgust",
-    "example": "Ağustos yazın son ayıdır",
-    "level": "A1",
-    "createdAt": "2026-03-18T16:10:47.473Z",
-    "step": 1
-  },
-  {
-    "id": "jqug7a5yt",
-    "tr": "Afrika ",
-    "uz": "Afrika ",
-    "example": "Afrika kıtası çok büyük",
-    "level": "A1",
-    "createdAt": "2026-03-18T16:10:06.920Z",
-    "step": 1
-  },
-  {
-    "id": "qaax2gikc",
-    "tr": "Anneler günü",
-    "uz": "Onalar kuni",
-    "example": "Anneler günü kutlu olsun anneciğim",
-    "level": "A1",
-    "createdAt": "2026-03-18T16:09:13.876Z",
-    "step": 1
-  },
-  {
-    "id": "j012emiqj",
+    "id": "a1s2-11",
     "tr": "Arkadaş",
-    "uz": "O’rtoq",
-    "example": "Bu en yakın arkadaşım.",
+    "uz": "Do'st (O'rtoq)",
+    "example": "Bu benim en iyi arkadaşım.",
     "level": "A1",
-    "createdAt": "2026-03-18T16:08:27.912Z",
-    "step": 1
+    "step": 2
+  },
+  {
+    "id": "a1s2-12",
+    "tr": "Komşu",
+    "uz": "Qo'shni",
+    "example": "Yeni komşularımız çok nazik insanlar.",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-13",
+    "tr": "Bebek",
+    "uz": "Chaqaloq (Chaqaloq)",
+    "example": "Bebek mışıl mışıl uyuyor.",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-14",
+    "tr": "Çocuk",
+    "uz": "Bola",
+    "example": "Çocuklar parkta oyun oynuyor.",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-15",
+    "tr": "Kız",
+    "uz": "Qiz",
+    "example": "Kız kardeşim çok akıllı bir çocuktur.",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-16",
+    "tr": "Erkek",
+    "uz": "Erkak (O'g'il)",
+    "example": "Erkek kardeşim futbolu çok sever.",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-17",
+    "tr": "İsim",
+    "uz": "Ism (Nom)",
+    "example": "Sizin isminiz nedir?",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-18",
+    "tr": "Yaş",
+    "uz": "Yosh",
+    "example": "Siz kaç yaşındasınız?",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-19",
+    "tr": "Öğrenci",
+    "uz": "Talaba (O'quvchi)",
+    "example": "Ben Türkçe öğrenen bir öğrenciyim.",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-20",
+    "tr": "Öğretmen",
+    "uz": "O'qituvchi",
+    "example": "Öğretmenimiz çok yardımsever.",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-21",
+    "tr": "Okul",
+    "uz": "Maktab",
+    "example": "Okul saat sekizde başlıyor.",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-22",
+    "tr": "İş",
+    "uz": "Ish",
+    "example": "Babam her sabah işe gider.",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-23",
+    "tr": "Şehir",
+    "uz": "Shahar",
+    "example": "Bu şehir çok kalabalık.",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-24",
+    "tr": "Ülke",
+    "uz": "Mamlakat",
+    "example": "Türkiye çok güzel bir ülke.",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s2-25",
+    "tr": "Dünya",
+    "uz": "Dunyo",
+    "example": "Dünya hızla değişiyor.",
+    "level": "A1",
+    "step": 2
+  },
+  {
+    "id": "a1s3-1",
+    "tr": "Bir",
+    "uz": "Bir",
+    "example": "Masada bir elma var.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-2",
+    "tr": "İki",
+    "uz": "Ikki",
+    "example": "Kütüphaneden iki kitap aldım.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-3",
+    "tr": "Üç",
+    "uz": "Uch",
+    "example": "Üç gün sonra tatil başlıyor.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-4",
+    "tr": "Dört",
+    "uz": "To'rt",
+    "example": "Bir yıl dört mevsimden oluşur.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-5",
+    "tr": "Beş",
+    "uz": "Besh",
+    "example": "Beş dakika bekleyin lütfen.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-6",
+    "tr": "Altı",
+    "uz": "Olti",
+    "example": "Saat altıda buluşalım.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-7",
+    "tr": "Yedi",
+    "uz": "Yetti",
+    "example": "Haftanın yedi günü var.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-8",
+    "tr": "Sekiz",
+    "uz": "Sakkiz",
+    "example": "Sabah sekizde dersim var.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-9",
+    "tr": "Dokuz",
+    "uz": "To'qqiz",
+    "example": "Dokuzuncu kata çıkmalısın.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-10",
+    "tr": "On",
+    "uz": "O'n",
+    "example": "On lira para üstü aldım.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-11",
+    "tr": "Yirmi",
+    "uz": "Yigirma",
+    "example": "Sınıfta yirmi öğrenci var.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-12",
+    "tr": "Elli",
+    "uz": "Ellik",
+    "example": "Elli sayfa kitap okudum.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-13",
+    "tr": "Yüz",
+    "uz": "Yuz",
+    "example": "Sınavdan yüz puan aldım.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-14",
+    "tr": "Beyaz",
+    "uz": "Oq",
+    "example": "Beyaz bir gömlek giydi.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-15",
+    "tr": "Siyah",
+    "uz": "Qora",
+    "example": "Siyah ayakkabılarını giydi.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-16",
+    "tr": "Kırmızı",
+    "uz": "Qizil",
+    "example": "Kırmızı elmalar çok tatlı.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-17",
+    "tr": "Mavi",
+    "uz": "Moviy (Ko'k)",
+    "example": "Gökyüzü bugün çok mavi.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-18",
+    "tr": "Yeşil",
+    "uz": "Yashil",
+    "example": "Yeşil ağaçların arasında yürüdük.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-19",
+    "tr": "Sarı",
+    "uz": "Sariq",
+    "example": "Sarı saçlı bir kız geldi.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-20",
+    "tr": "Turuncu",
+    "uz": "To'q sariq (Oranj)",
+    "example": "Güneş batan turuncu bir ışık yayıyor.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-21",
+    "tr": "Pembe",
+    "uz": "Pushti",
+    "example": "Pembe çiçekler bahçeyi süsledi.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-22",
+    "tr": "Mor",
+    "uz": "Binafsha",
+    "example": "Mor bir elbise satın aldı.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-23",
+    "tr": "Gri",
+    "uz": "Kulrang",
+    "example": "Gri binaların arasından geçtik.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-24",
+    "tr": "Kahverengi",
+    "uz": "Jigarrang",
+    "example": "Kahverengi gözleri vardı.",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s3-25",
+    "tr": "Renk",
+    "uz": "Rang",
+    "example": "En sevdiğin renk hangisi?",
+    "level": "A1",
+    "step": 3
+  },
+  {
+    "id": "a1s4-1",
+    "tr": "Ekmek",
+    "uz": "Non",
+    "example": "Fırından taze ekmek aldım.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-2",
+    "tr": "Su",
+    "uz": "Suv",
+    "example": "Bir bardak su içer misin?",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-3",
+    "tr": "Yemek",
+    "uz": "Taom (Ovqat)",
+    "example": "Akşam yemeği hazır.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-4",
+    "tr": "Çay",
+    "uz": "Choy",
+    "example": "Türk çayı çok meşhurdur.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-5",
+    "tr": "Kahve",
+    "uz": "Kofe",
+    "example": "Sabahları her zaman kahve içerim.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-6",
+    "tr": "Süt",
+    "uz": "Sut",
+    "example": "Çocuklar her gün süt içmeli.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-7",
+    "tr": "Şeker",
+    "uz": "Shakar",
+    "example": "Çaya şeker atmıyorum.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-8",
+    "tr": "Tuz",
+    "uz": "Tuz",
+    "example": "Lütfen biraz tuz uzatır mısın?",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-9",
+    "tr": "Kahvaltı",
+    "uz": "Nonushta",
+    "example": "Kahvaltı yapmadan evden çıkmam.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-10",
+    "tr": "Öğle yemeği",
+    "uz": "Tushlik",
+    "example": "Öğle yemeğini okulda yiyorum.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-11",
+    "tr": "Akşam yemeği",
+    "uz": "Kechki ovqat",
+    "example": "Akşam yemeği için ne hazırladın?",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-12",
+    "tr": "Meyve",
+    "uz": "Mevalar",
+    "example": "Meyve tabağı hazırladık.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-13",
+    "tr": "Sebze",
+    "uz": "Sabzavotlar",
+    "example": "Sebze pazarına gittik.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-14",
+    "tr": "Elma",
+    "uz": "Olma",
+    "example": "Günde bir elma çok sağlıklıdır.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-15",
+    "tr": "Üzüm",
+    "uz": "Uzum",
+    "example": "Üzüm bağlarını gezdik.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-16",
+    "tr": "Domates",
+    "uz": "Pomidor",
+    "example": "Salata için domates doğradım.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-17",
+    "tr": "Patates",
+    "uz": "Kartoshka",
+    "example": "Patates kızartması yaptık.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-18",
+    "tr": "Et",
+    "uz": "Go'sht",
+    "example": "Bugün etli yemek yedik.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-19",
+    "tr": "Tavuk",
+    "uz": "Tovuq",
+    "example": "Tavuk suyuna çorba içtik.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-20",
+    "tr": "Balık",
+    "uz": "Baliq",
+    "example": "Fırında balık çok lezzetli olur.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-21",
+    "tr": "Peynir",
+    "uz": "Pishloq",
+    "example": "Peynirli börek yaptık.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-22",
+    "tr": "Zeytin",
+    "uz": "Zaytun",
+    "example": "Kahvaltıda siyah zeytin yedik.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-23",
+    "tr": "Yumurta",
+    "uz": "Tuxum",
+    "example": "Her sabah haşlanmış yumurta yerim.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-24",
+    "tr": "Sıcak",
+    "uz": "Issiq",
+    "example": "Bu hava çok sıcak.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "a1s4-25",
+    "tr": "Soğuk",
+    "uz": "Sovuq",
+    "example": "Dışarıda hava çok soğuk.",
+    "level": "A1",
+    "step": 4
+  },
+  {
+    "id": "p-a1s5-0",
+    "tr": "Uyanmak",
+    "uz": "Uyg'onmoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-1",
+    "tr": "Kalkmak",
+    "uz": "Turmoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-2",
+    "tr": "Yıkamak",
+    "uz": "Yuvmoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-3",
+    "tr": "Fırçalamak",
+    "uz": "Tozalamoq (Cho'tkalamoq)",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-4",
+    "tr": "Hazırlanmak",
+    "uz": "Tayyorlanmoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-5",
+    "tr": "Giyinmek",
+    "uz": "Kiyinmoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-6",
+    "tr": "Çıkmak",
+    "uz": "Chiqmoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-7",
+    "tr": "Binmek",
+    "uz": "Minmoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-8",
+    "tr": "Beklemek",
+    "uz": "Kutmoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-9",
+    "tr": "Çalışmak",
+    "uz": "İshlamoq (O'qimoq)",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-10",
+    "tr": "Öğrenmek",
+    "uz": "O'rganmoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-11",
+    "tr": "Dinlenmek",
+    "uz": "Dam olmoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-12",
+    "tr": "Okumak",
+    "uz": "O'qimoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-13",
+    "tr": "İzlemek",
+    "uz": "Ko'rmoq (Tomosha qilmoq)",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-14",
+    "tr": "Uyumak",
+    "uz": "Uxlamoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-15",
+    "tr": "Rüya",
+    "uz": "Tush",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-16",
+    "tr": "Yürüyüş",
+    "uz": "Sayr (Piyoda yurish)",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-17",
+    "tr": "Spor",
+    "uz": "Sport",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-18",
+    "tr": "Alışveriş",
+    "uz": "Xarid qilish",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-19",
+    "tr": "Temizlik",
+    "uz": "Tozalash",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-20",
+    "tr": "Misafir",
+    "uz": "Mehmon",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-21",
+    "tr": "Sohbet",
+    "uz": "Suhbat",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-22",
+    "tr": "Telefon",
+    "uz": "Telefon",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-23",
+    "tr": "Pazar",
+    "uz": "Bozor",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s5-24",
+    "tr": "Buluşmak",
+    "uz": "Uchrashmoq",
+    "level": "A1",
+    "step": 5
+  },
+  {
+    "id": "p-a1s6-25",
+    "tr": "Baş",
+    "uz": "Bosh",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-26",
+    "tr": "Göz",
+    "uz": "Ko'z",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-27",
+    "tr": "Kulak",
+    "uz": "Quloq",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-28",
+    "tr": "Burun",
+    "uz": "Burun",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-29",
+    "tr": "Ağız",
+    "uz": "Og'iz",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-30",
+    "tr": "Diş",
+    "uz": "Tish",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-31",
+    "tr": "Dil",
+    "uz": "Til",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-32",
+    "tr": "Boğaz",
+    "uz": "Tomoq",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-33",
+    "tr": "Boyun",
+    "uz": "Bo'yin",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-34",
+    "tr": "Omuz",
+    "uz": "Yelka",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-35",
+    "tr": "El",
+    "uz": "Qo'l",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-36",
+    "tr": "Parmak",
+    "uz": "Barmoq",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-37",
+    "tr": "Bacak",
+    "uz": "Oyoq (son)",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-38",
+    "tr": "Ayak",
+    "uz": "Oyoq (panja)",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-39",
+    "tr": "Kalp",
+    "uz": "Yurak",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-40",
+    "tr": "Mide",
+    "uz": "Oshqozon",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-41",
+    "tr": "Hastane",
+    "uz": "Kasalxona",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-42",
+    "tr": "Doktor",
+    "uz": "Shifokor",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-43",
+    "tr": "İlaç",
+    "uz": "Dori",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-44",
+    "tr": "Eczane",
+    "uz": "Dorixona",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-45",
+    "tr": "Ateş",
+    "uz": "Isitma",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-46",
+    "tr": "Nezle",
+    "uz": "Gripp (Shamollash)",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-47",
+    "tr": "Randevu",
+    "uz": "Uchrashuv",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-48",
+    "tr": "Reçete",
+    "uz": "Retsept",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s6-49",
+    "tr": "Muayene",
+    "uz": "Tekshiruv",
+    "level": "A1",
+    "step": 6
+  },
+  {
+    "id": "p-a1s7-50",
+    "tr": "Gömlek",
+    "uz": "Ko'ylak",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-51",
+    "tr": "Pantolon",
+    "uz": "Shim",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-52",
+    "tr": "Ceket",
+    "uz": "Kiyim (Ko'ylak)",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-53",
+    "tr": "Elbise",
+    "uz": "Ko'ylak (Ayollar)",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-54",
+    "tr": "Etek",
+    "uz": "Yubka",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-55",
+    "tr": "Ayakkabı",
+    "uz": "Oyoq kiyim",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-56",
+    "tr": "Şapka",
+    "uz": "Shlyapa (Qalpoq)",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-57",
+    "tr": "Eldiven",
+    "uz": "Qo'lqop",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-58",
+    "tr": "Atkı",
+    "uz": "Sharf",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-59",
+    "tr": "Çorap",
+    "uz": "Paypoq",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-60",
+    "tr": "Kuşak / Kemer",
+    "uz": "Kamar",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-61",
+    "tr": "Gözlük",
+    "uz": "Ko'zoynak",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-62",
+    "tr": "Saat",
+    "uz": "Soat",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-63",
+    "tr": "Cüzdan",
+    "uz": "Hamyon",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-64",
+    "tr": "Market",
+    "uz": "Do'kon (Bozor)",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-65",
+    "tr": "Fiyat",
+    "uz": "Narx",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-66",
+    "tr": "İndirim",
+    "uz": "Chegirma",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-67",
+    "tr": "Pahalı",
+    "uz": "Qimmat",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-68",
+    "tr": "Ucuz",
+    "uz": "Arzon",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-69",
+    "tr": "Yeni",
+    "uz": "Yangi",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-70",
+    "tr": "Eski",
+    "uz": "Eski",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-71",
+    "tr": "Büyük",
+    "uz": "Katta",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-72",
+    "tr": "Küçük",
+    "uz": "Kichik",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-73",
+    "tr": "Güzel",
+    "uz": "Go'zal",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s7-74",
+    "tr": "Çirkin",
+    "uz": "Xunuk",
+    "level": "A1",
+    "step": 7
+  },
+  {
+    "id": "p-a1s8-75",
+    "tr": "Zaman",
+    "uz": "Vaqt",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-76",
+    "tr": "Dakika",
+    "uz": "Daqiqa",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-77",
+    "tr": "Saat",
+    "uz": "Soat",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-78",
+    "tr": "Gün",
+    "uz": "Kun",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-79",
+    "tr": "Hafta",
+    "uz": "Hafta",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-80",
+    "tr": "Ay",
+    "uz": "Oy",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-81",
+    "tr": "Yıl",
+    "uz": "Yil",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-82",
+    "tr": "Bugün",
+    "uz": "Bugun",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-83",
+    "tr": "Dün",
+    "uz": "Kecha",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-84",
+    "tr": "Yarın",
+    "uz": "Ertaga",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-85",
+    "tr": "Sabah",
+    "uz": "Ertalab",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-86",
+    "tr": "Öğle",
+    "uz": "Tush (kun)",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-87",
+    "tr": "Akşam",
+    "uz": "Kech (Oqshom)",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-88",
+    "tr": "Gece",
+    "uz": "Tun",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-89",
+    "tr": "Şimdi",
+    "uz": "Hozir",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-90",
+    "tr": "Sonra",
+    "uz": "Keyin",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-91",
+    "tr": "Önce",
+    "uz": "Avval",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-92",
+    "tr": "Erken",
+    "uz": "Erta",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-93",
+    "tr": "Geç",
+    "uz": "Kech",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-94",
+    "tr": "İlkbahar",
+    "uz": "Bahor",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-95",
+    "tr": "Yaz",
+    "uz": "Yoz",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-96",
+    "tr": "Sonbahar",
+    "uz": "Kuz",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-97",
+    "tr": "Kış",
+    "uz": "Qish",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-98",
+    "tr": "Ocak",
+    "uz": "Yanvar",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s8-99",
+    "tr": "Aralık",
+    "uz": "Dekabr",
+    "level": "A1",
+    "step": 8
+  },
+  {
+    "id": "p-a1s9-100",
+    "tr": "Öğretmen",
+    "uz": "O'qituvchi",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-101",
+    "tr": "Mühendis",
+    "uz": "Muhandis",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-102",
+    "tr": "Mimar",
+    "uz": "Me'mor",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-103",
+    "tr": "Avukat",
+    "uz": "Advokat",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-104",
+    "tr": "Polis",
+    "uz": "Politsiyachi",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-105",
+    "tr": "Asker",
+    "uz": "Askariya (Askariya)",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-106",
+    "tr": "Esnaf",
+    "uz": "Savatli (Xalqaro savdogar)",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-107",
+    "tr": "Müdür",
+    "uz": "Muddir (Boshliq)",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-108",
+    "tr": "Sekreter",
+    "uz": "Kotiba",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-109",
+    "tr": "Şoför",
+    "uz": "Haydovchi",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-110",
+    "tr": "Aşçı",
+    "uz": "Oshpaz",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-111",
+    "tr": "İşçi",
+    "uz": "Ishchi",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-112",
+    "tr": "Emekli",
+    "uz": "Nafaqaxur (Pensioner)",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-113",
+    "tr": "Öğrenci",
+    "uz": "Talaba (O'quvchi)",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-114",
+    "tr": "Bilgisayar",
+    "uz": "Kompyuter",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-115",
+    "tr": "İnternet",
+    "uz": "Internet",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-116",
+    "tr": "E-posta",
+    "uz": "Elektron pochta",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-117",
+    "tr": "Toplantı",
+    "uz": "Majlis (Uchrashuv)",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-118",
+    "tr": "Maaş",
+    "uz": "Maosh",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-119",
+    "tr": "Tatil",
+    "uz": "Ta'til",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-120",
+    "tr": "Yorgun",
+    "uz": "Charchagan",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-121",
+    "tr": "Meşgul",
+    "uz": "Band",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-122",
+    "tr": "Boş zaman",
+    "uz": "Bo'sh vaqt",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-123",
+    "tr": "Başarı",
+    "uz": "Muvaffaqiyat",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s9-124",
+    "tr": "Hedef",
+    "uz": "Maqsad",
+    "level": "A1",
+    "step": 9
+  },
+  {
+    "id": "p-a1s10-125",
+    "tr": "Sandalye",
+    "uz": "Stul",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-126",
+    "tr": "Masa",
+    "uz": "Stol",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-127",
+    "tr": "Koltuk",
+    "uz": "O'rindiq (Divan)",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-128",
+    "tr": "Yatak",
+    "uz": "Yotoq",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-129",
+    "tr": "Perde",
+    "uz": "Parda",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-130",
+    "tr": "Halı",
+    "uz": "Gilam",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-131",
+    "tr": "Lamba",
+    "uz": "Lampa",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-132",
+    "tr": "Ayna",
+    "uz": "Oyna (Ko'zgu)",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-133",
+    "tr": "Buzdolabı",
+    "uz": "Sovutgich (Muzlatgich)",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-134",
+    "tr": "Fırın",
+    "uz": "Pech",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-135",
+    "tr": "Televizyon",
+    "uz": "Televizor",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-136",
+    "tr": "Bilgisayar",
+    "uz": "Kompyuter",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-137",
+    "tr": "Telefon",
+    "uz": "Telefon",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-138",
+    "tr": "Yastık",
+    "uz": "Yostiq",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-139",
+    "tr": "Battaniye",
+    "uz": "Adyol",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-140",
+    "tr": "Tabak",
+    "uz": "Lagan (Tovoq)",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-141",
+    "tr": "Bardak",
+    "uz": "Stakan",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-142",
+    "tr": "Çatal",
+    "uz": "Sanchqi",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-143",
+    "tr": "Bıçak",
+    "uz": "Pichoq",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-144",
+    "tr": "Kaşık",
+    "uz": "Qoshiq",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-145",
+    "tr": "Pencere",
+    "uz": "Deraza",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-146",
+    "tr": "Kapı",
+    "uz": "Eshik",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-147",
+    "tr": "Duvar",
+    "uz": "Devor",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-148",
+    "tr": "Tavan",
+    "uz": "Shift",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s10-149",
+    "tr": "Zemin",
+    "uz": "Zamin (Pol)",
+    "level": "A1",
+    "step": 10
+  },
+  {
+    "id": "p-a1s11-150",
+    "tr": "Doğa",
+    "uz": "Tabiat",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-151",
+    "tr": "Dağ",
+    "uz": "Tog'",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-152",
+    "tr": "Deniz",
+    "uz": "Dengiz",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-153",
+    "tr": "Nehir",
+    "uz": "Daryo",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-154",
+    "tr": "Göl",
+    "uz": "Ko'l",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-155",
+    "tr": "Orman",
+    "uz": "O'rmon",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-156",
+    "tr": "Ağaç",
+    "uz": "Daraxt",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-157",
+    "tr": "Çiçek",
+    "uz": "Gul",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-158",
+    "tr": "Güneş",
+    "uz": "Quyosh",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-159",
+    "tr": "Ay",
+    "uz": "Oy",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-160",
+    "tr": "Yıldız",
+    "uz": "Yulduz",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-161",
+    "tr": "Bulut",
+    "uz": "Bulut",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-162",
+    "tr": "Yağmur",
+    "uz": "Yomg'ir",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-163",
+    "tr": "Kar",
+    "uz": "Qor",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-164",
+    "tr": "Rüzgar",
+    "uz": "Shamol",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-165",
+    "tr": "Sıcak",
+    "uz": "Issiq",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-166",
+    "tr": "Soğuk",
+    "uz": "Sovuq",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-167",
+    "tr": "Ilık",
+    "uz": "Iliq",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-168",
+    "tr": "Nemli",
+    "uz": "Namli (Rütubatli)",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-169",
+    "tr": "Kurak",
+    "uz": "Quruq",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-170",
+    "tr": "Şimşek",
+    "uz": "Chaqmoq",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-171",
+    "tr": "Fırtına",
+    "uz": "Bo'ron",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-172",
+    "tr": "Mevsim",
+    "uz": "Fasl",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-173",
+    "tr": "Çevre",
+    "uz": "Atrof-muhit",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s11-174",
+    "tr": "Gökkuşağı",
+    "uz": "Kamalak",
+    "level": "A1",
+    "step": 11
+  },
+  {
+    "id": "p-a1s12-175",
+    "tr": "Mutlu",
+    "uz": "Baxtiyor",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-176",
+    "tr": "Üzgün",
+    "uz": "Xafa",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-177",
+    "tr": "Kızgın",
+    "uz": "G'azablangan",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-178",
+    "tr": "Korkmuş",
+    "uz": "Qo'rqqan",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-179",
+    "tr": "Şaşırmış",
+    "uz": "Hayron qolgan",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-180",
+    "tr": "Heyecanlı",
+    "uz": "Hayajonlangan",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-181",
+    "tr": "Sakin",
+    "uz": "Xotirjam",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-182",
+    "tr": "Yorgun",
+    "uz": "Charchagan",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-183",
+    "tr": "Uykulu",
+    "uz": "Uyqusiragan",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-184",
+    "tr": "Sıkılmış",
+    "uz": "Zarıkkan",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-185",
+    "tr": "Yalnız",
+    "uz": "Yolg'iz",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-186",
+    "tr": "Aşık",
+    "uz": "Oshiq",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-187",
+    "tr": "Sevgi",
+    "uz": "Sevgi",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-188",
+    "tr": "Nefret",
+    "uz": "Nafrat",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-189",
+    "tr": "Güven",
+    "uz": "Ishonch",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-190",
+    "tr": "Korku",
+    "uz": "Qo'rqinch",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-191",
+    "tr": "Cesaret",
+    "uz": "Jasorat",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-192",
+    "tr": "Arkadaş",
+    "uz": "Do'st",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-193",
+    "tr": "Akraba",
+    "uz": "Qarindosh",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-194",
+    "tr": "Komşu",
+    "uz": "Qo'shni",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-195",
+    "tr": "Misafir",
+    "uz": "Mehmon",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-196",
+    "tr": "Dürüst",
+    "uz": "To'g'ri so'z (Sodiq)",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-197",
+    "tr": "Kibar",
+    "uz": "Xushmuomala",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-198",
+    "tr": "Yaramaz",
+    "uz": "Sho'x (Yomon xulqli)",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s12-199",
+    "tr": "Zeki",
+    "uz": "Aqlli",
+    "level": "A1",
+    "step": 12
+  },
+  {
+    "id": "p-a1s13-200",
+    "tr": "Yolculuk",
+    "uz": "Sayohat",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-201",
+    "tr": "Bilet",
+    "uz": "Chipta",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-202",
+    "tr": "Pasaport",
+    "uz": "Pasport",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-203",
+    "tr": "Valiz",
+    "uz": "Chamadon",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-204",
+    "tr": "Havalimanı",
+    "uz": "Aeroport",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-205",
+    "tr": "Otogar",
+    "uz": "Avtovokzal",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-206",
+    "tr": "Tren",
+    "uz": "Poyezd",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-207",
+    "tr": "Gemi",
+    "uz": "Kema",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-208",
+    "tr": "Otel",
+    "uz": "Mehmonxona",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-209",
+    "tr": "Rezervasyon",
+    "uz": "Band qilish",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-210",
+    "tr": "Turist",
+    "uz": "Sayyoh",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-211",
+    "tr": "Harita",
+    "uz": "Xarita",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-212",
+    "tr": "Müze",
+    "uz": "Muzey",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-213",
+    "tr": "Rehber",
+    "uz": "Gid (Yo'lboshchi)",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-214",
+    "tr": "Gezmek",
+    "uz": "Aylanmoq (Sayohat qilmoq)",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-215",
+    "tr": "Fotoğraf",
+    "uz": "Surat (Fotosurat)",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-216",
+    "tr": "Anı",
+    "uz": "Xotira",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-217",
+    "tr": "Hediyelik",
+    "uz": "Sovg'abop",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-218",
+    "tr": "Yabancı",
+    "uz": "Chet ellik (Begona)",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-219",
+    "tr": "Ülke",
+    "uz": "Mamlakat",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-220",
+    "tr": "Şehir",
+    "uz": "Shahar",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-221",
+    "tr": "Köy",
+    "uz": "Qishloq",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-222",
+    "tr": "Plaj",
+    "uz": "Plyaj",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-223",
+    "tr": "Yüzme",
+    "uz": "Suzish",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s13-224",
+    "tr": "Eğlence",
+    "uz": "O'yin-kulgu",
+    "level": "A1",
+    "step": 13
+  },
+  {
+    "id": "p-a1s14-225",
+    "tr": "Okul",
+    "uz": "Maktab",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-226",
+    "tr": "Sınıf",
+    "uz": "Sinf",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-227",
+    "tr": "Öğretmen",
+    "uz": "O'qituvchi",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-228",
+    "tr": "Öğrenci",
+    "uz": "O'quvchi",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-229",
+    "tr": "Kitap",
+    "uz": "Kitob",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-230",
+    "tr": "Defter",
+    "uz": "Daftar",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-231",
+    "tr": "Kalem",
+    "uz": "Qalam",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-232",
+    "tr": "Silgi",
+    "uz": "O'chirg'ich",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-233",
+    "tr": "Çanta",
+    "uz": "Sumka",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-234",
+    "tr": "Tahta",
+    "uz": "Doska",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-235",
+    "tr": "Ders",
+    "uz": "Dars",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-236",
+    "tr": "Ödev",
+    "uz": "Uy vazifasi",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-237",
+    "tr": "Sınav",
+    "uz": "Imtihon",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-238",
+    "tr": "Not",
+    "uz": "Baholash (Baho)",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-239",
+    "tr": "Karne",
+    "uz": "Baholar kundaligi (Tabel)",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-240",
+    "tr": "Üniversite",
+    "uz": "Universitet",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-241",
+    "tr": "Bölüm",
+    "uz": "Bo'lim (Fakultet)",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-242",
+    "tr": "Kütüphane",
+    "uz": "Kutubxona",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-243",
+    "tr": "Okumak",
+    "uz": "O'qimoq",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-244",
+    "tr": "Yazmak",
+    "uz": "Yozmoq",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-245",
+    "tr": "Anlamak",
+    "uz": "Tushunmoq",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-246",
+    "tr": "Sormak",
+    "uz": "So'ramoq",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-247",
+    "tr": "Cevaplamak",
+    "uz": "Javob bermoq",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-248",
+    "tr": "Mezun",
+    "uz": "Bitiruvchi",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s14-249",
+    "tr": "Diploma",
+    "uz": "Diplom",
+    "level": "A1",
+    "step": 14
+  },
+  {
+    "id": "p-a1s15-250",
+    "tr": "Spor",
+    "uz": "Sport",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-251",
+    "tr": "Futbol",
+    "uz": "Futbol",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-252",
+    "tr": "Basketbol",
+    "uz": "Basketbol",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-253",
+    "tr": "Voleybol",
+    "uz": "Voleybol",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-254",
+    "tr": "Yüzme",
+    "uz": "Suzish",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-255",
+    "tr": "Koşu",
+    "uz": "Yugurish",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-256",
+    "tr": "Bisiklet",
+    "uz": "Velosiped",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-257",
+    "tr": "Tenis",
+    "uz": "Tennis",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-258",
+    "tr": "Satranç",
+    "uz": "Shaxmat",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-259",
+    "tr": "Müzik",
+    "uz": "Musiqa",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-260",
+    "tr": "Gitar",
+    "uz": "Gitara",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-261",
+    "tr": "Piyano",
+    "uz": "Piyano",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-262",
+    "tr": "Resim",
+    "uz": "Rasm",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-263",
+    "tr": "Dans",
+    "uz": "Raqs",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-264",
+    "tr": "Sinema",
+    "uz": "Kinoteatr",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-265",
+    "tr": "Tiyatro",
+    "uz": "Teatr",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-266",
+    "tr": "Oyun",
+    "uz": "O'yin",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-267",
+    "tr": "Koleksiyon",
+    "uz": "Kolleksiya",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-268",
+    "tr": "Yürüyüş",
+    "uz": "Sayr (Piyoda yurish)",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-269",
+    "tr": "Kamp",
+    "uz": "Lager (Kemping)",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-270",
+    "tr": "Balık tutma",
+    "uz": "Baliq ovlash",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-271",
+    "tr": "Yemek yapma",
+    "uz": "Ovqat pishirish",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-272",
+    "tr": "Bahçe işleri",
+    "uz": "Bog'dorchilik",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-273",
+    "tr": "Fotoğrafçılık",
+    "uz": "Fotosuratchilik",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s15-274",
+    "tr": "Gezi",
+    "uz": "Sayohat (Ekskursiya)",
+    "level": "A1",
+    "step": 15
+  },
+  {
+    "id": "p-a1s16-275",
+    "tr": "Alışveriş",
+    "uz": "Xaridorlik (Sotib olish)",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-276",
+    "tr": "Market",
+    "uz": "Do'kon",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-277",
+    "tr": "Bakkal",
+    "uz": "Baqqol",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-278",
+    "tr": "Manav",
+    "uz": "Meva-sabzavot do'koni",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-279",
+    "tr": "Kasap",
+    "uz": "Qassob",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-280",
+    "tr": "Ekmek",
+    "uz": "Non",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-281",
+    "tr": "Süt",
+    "uz": "Sut",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-282",
+    "tr": "Yumurta",
+    "uz": "Tuxum",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-283",
+    "tr": "Peynir",
+    "uz": "Pishloq",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-284",
+    "tr": "Zeytin",
+    "uz": "Zaytun",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-285",
+    "tr": "Et",
+    "uz": "Go'sht",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-286",
+    "tr": "Tavuk",
+    "uz": "Tovuq",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-287",
+    "tr": "Balık",
+    "uz": "Baliq",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-288",
+    "tr": "Sebze",
+    "uz": "Sabzavot",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-289",
+    "tr": "Meyve",
+    "uz": "Meva",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-290",
+    "tr": "Şeker",
+    "uz": "Shakar",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-291",
+    "tr": "Tuz",
+    "uz": "Tuz",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-292",
+    "tr": "Yağ",
+    "uz": "Yog'",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-293",
+    "tr": "Para",
+    "uz": "Pul",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-294",
+    "tr": "Kredi kartı",
+    "uz": "Kredit karta",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-295",
+    "tr": "Nakit",
+    "uz": "Naqd pul",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-296",
+    "tr": "Fiş",
+    "uz": "Chek",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-297",
+    "tr": "Fiyat",
+    "uz": "Narx",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-298",
+    "tr": "Poşet",
+    "uz": "Paket (Xalta)",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s16-299",
+    "tr": "Sepet",
+    "uz": "Savat",
+    "level": "A1",
+    "step": 16
+  },
+  {
+    "id": "p-a1s17-300",
+    "tr": "Bilgisayar",
+    "uz": "Kompyuter",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-301",
+    "tr": "İnternet",
+    "uz": "Internet",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-302",
+    "tr": "Telefon",
+    "uz": "Telefon",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-303",
+    "tr": "Televizyon",
+    "uz": "Televizor",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-304",
+    "tr": "Radyo",
+    "uz": "Radio",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-305",
+    "tr": "Gazete",
+    "uz": "Gazeta",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-306",
+    "tr": "Dergi",
+    "uz": "Jurnal",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-307",
+    "tr": "Reklam",
+    "uz": "Reklama",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-308",
+    "tr": "Mesaj",
+    "uz": "Xabar",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-309",
+    "tr": "E-posta",
+    "uz": "Elektron pochta",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-310",
+    "tr": "Sanal",
+    "uz": "Virtual",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-311",
+    "tr": "Şifre",
+    "uz": "Parol (Kod)",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-312",
+    "tr": "Ekran",
+    "uz": "Ekran",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-313",
+    "tr": "Klavye",
+    "uz": "Klaviatura",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-314",
+    "tr": "Fare / Mouse",
+    "uz": "Sichqoncha (Sichqon)",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-315",
+    "tr": "Yazıcı",
+    "uz": "Printer",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-316",
+    "tr": "Kamera",
+    "uz": "Kamera",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-317",
+    "tr": "Hoparlör",
+    "uz": "Karnay (Dinamik)",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-318",
+    "tr": "Kablo",
+    "uz": "Kabel (Sim)",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-319",
+    "tr": "Batarya",
+    "uz": "Batareya",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-320",
+    "tr": "Uygulama",
+    "uz": "Ilova",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-321",
+    "tr": "Site",
+    "uz": "Sayt",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-322",
+    "tr": "Hesap",
+    "uz": "Hisob",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-323",
+    "tr": "Takipçi",
+    "uz": "Obunachi (Kuzatuvchi)",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s17-324",
+    "tr": "Bağlantı",
+    "uz": "Bog'lanish (Aloqa)",
+    "level": "A1",
+    "step": 17
+  },
+  {
+    "id": "p-a1s18-325",
+    "tr": "Şehir",
+    "uz": "Shahar",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-326",
+    "tr": "Mahalle",
+    "uz": "Mahalla",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-327",
+    "tr": "Sokak",
+    "uz": "Ko'cha",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-328",
+    "tr": "Cadde",
+    "uz": "Shox ko'cha (Prospekt)",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-329",
+    "tr": "Meydan",
+    "uz": "Maydon",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-330",
+    "tr": "Park",
+    "uz": "Bog' (Park)",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-331",
+    "tr": "Bina",
+    "uz": "Bino",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-332",
+    "tr": "Apartman",
+    "uz": "Ko'p qavatli uy",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-333",
+    "tr": "Ofis",
+    "uz": "Ofis (Idora)",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-334",
+    "tr": "Banka",
+    "uz": "Bank",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-335",
+    "tr": "Postane",
+    "uz": "Pochta",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-336",
+    "tr": "Kütüphane",
+    "uz": "Kutubxona",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-337",
+    "tr": "Sinema",
+    "uz": "Kinoteatr",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-338",
+    "tr": "Kafeterya",
+    "uz": "Oshxona (Kafe)",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-339",
+    "tr": "Restoran",
+    "uz": "Restoran",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-340",
+    "tr": "Karakol",
+    "uz": "Politsiya bo'limi",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-341",
+    "tr": "Belediye",
+    "uz": "Hokimiyat (Shahar boshqarmasi)",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-342",
+    "tr": "Durak",
+    "uz": "Bekat",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-343",
+    "tr": "İstasyon",
+    "uz": "Stansiya",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-344",
+    "tr": "Liman",
+    "uz": "Port (Pristan)",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-345",
+    "tr": "Köprü",
+    "uz": "Ko'prik",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-346",
+    "tr": "Havuz",
+    "uz": "Hovuz",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-347",
+    "tr": "Cami",
+    "uz": "Masjid",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-348",
+    "tr": "Kilise",
+    "uz": "Cherkov",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s18-349",
+    "tr": "Okul",
+    "uz": "Maktab",
+    "level": "A1",
+    "step": 18
+  },
+  {
+    "id": "p-a1s19-350",
+    "tr": "Kültür",
+    "uz": "Madaniyat",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-351",
+    "tr": "Sanat",
+    "uz": "San'at",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-352",
+    "tr": "Müzik",
+    "uz": "Musiqa",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-353",
+    "tr": "Edebiyat",
+    "uz": "Adabiyot",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-354",
+    "tr": "Tarih",
+    "uz": "Tarix",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-355",
+    "tr": "Gelenek",
+    "uz": "An'ana",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-356",
+    "tr": "Bayram",
+    "uz": "Bayram",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-357",
+    "tr": "Düğün",
+    "uz": "To'y",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-358",
+    "tr": "Doğum günü",
+    "uz": "Tug'ilgan kun",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-359",
+    "tr": "Eğlence",
+    "uz": "O'yin-kulgu",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-360",
+    "tr": "Konser",
+    "uz": "Konsert",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-361",
+    "tr": "Sergi",
+    "uz": "Ko'rgazma",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-362",
+    "tr": "Moda",
+    "uz": "Moda",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-363",
+    "tr": "Sinema",
+    "uz": "Kino",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-364",
+    "tr": "Tiyatro",
+    "uz": "Teatr",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-365",
+    "tr": "Siyaset",
+    "uz": "Siyosat",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-366",
+    "tr": "Ekonomi",
+    "uz": "Iqtisodiyot",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-367",
+    "tr": "Gündem",
+    "uz": "Kun tartibi (Muhim voqea)",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-368",
+    "tr": "Haber",
+    "uz": "Xabar (Yangilik)",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-369",
+    "tr": "Toplum",
+    "uz": "Jamiyat",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-370",
+    "tr": "İnsanlar",
+    "uz": "Odamlar",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-371",
+    "tr": "Gençlik",
+    "uz": "Yoshlik",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-372",
+    "tr": "Çocukluk",
+    "uz": "Bolalik",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-373",
+    "tr": "Yaşlılık",
+    "uz": "Qarilik",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s19-374",
+    "tr": "Saygı",
+    "uz": "Hurmat",
+    "level": "A1",
+    "step": 19
+  },
+  {
+    "id": "p-a1s20-375",
+    "tr": "Doğru",
+    "uz": "To'g'ri",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-376",
+    "tr": "Yanlış",
+    "uz": "Noto'g'ri",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-377",
+    "tr": "İyi",
+    "uz": "Yaxshi",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-378",
+    "tr": "Kötü",
+    "uz": "Yomon",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-379",
+    "tr": "Hızlı",
+    "uz": "Tez",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-380",
+    "tr": "Yavaş",
+    "uz": "Sekin",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-381",
+    "tr": "Ağır",
+    "uz": "Og'ir",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-382",
+    "tr": "Hafif",
+    "uz": "Yengil",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-383",
+    "tr": "Sert",
+    "uz": "Qattiq",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-384",
+    "tr": "Yumuşak",
+    "uz": "Yumshoq",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-385",
+    "tr": "Acı",
+    "uz": "Achchiq",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-386",
+    "tr": "Tatlı",
+    "uz": "Shirin",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-387",
+    "tr": "Sıcak",
+    "uz": "Issiq",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-388",
+    "tr": "Soğuk",
+    "uz": "Sovuq",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-389",
+    "tr": "Zengin",
+    "uz": "Boy (Badavlat)",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-390",
+    "tr": "Fakir",
+    "uz": "Kambag'al",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-391",
+    "tr": "Akıllı",
+    "uz": "Aqlli",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-392",
+    "tr": "Aptal",
+    "uz": "Ahmoq",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-393",
+    "tr": "Cesur",
+    "uz": "Jasur",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-394",
+    "tr": "Korkak",
+    "uz": "Qo'rqoq",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-395",
+    "tr": "Önemli",
+    "uz": "Muhim",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-396",
+    "tr": "Luzumsuz",
+    "uz": "Befoyda",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-397",
+    "tr": "Net",
+    "uz": "Aniq",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-398",
+    "tr": "Karışık",
+    "uz": "Murakkab (Chigal)",
+    "level": "A1",
+    "step": 20
+  },
+  {
+    "id": "p-a1s20-399",
+    "tr": "Sürpriz",
+    "uz": "Syurpriz",
+    "level": "A1",
+    "step": 20
   }
 ]

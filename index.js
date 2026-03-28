@@ -291,6 +291,18 @@ app.delete('/api/words/:id', (req, res) => {
     res.json({ success: true });
 });
 
+app.put('/api/words/:id', (req, res) => {
+    const { tr, uz, example, level, step, password } = req.body;
+    if (password !== 'admin123') return res.status(403).json({ error: "Yetkisiz!" });
+    let words = readWords();
+    const index = words.findIndex(w => w.id === req.params.id);
+    if (index === -1) return res.status(404).json({ error: "Kelime bulunamadı!" });
+    
+    words[index] = { ...words[index], tr, uz, example: example || "", level, step: parseInt(step) };
+    saveWords(words);
+    res.json(words[index]);
+});
+
 app.get('/api/subjects', (req, res) => {
     res.json(readSubjects());
 });
@@ -475,14 +487,6 @@ bot.start(async (ctx) => {
     ]).resize());
 });
 
-function sendDailyReminders() {
-    const users = readUsers();
-    Object.values(users).forEach(user => {
-        if (user.chatId) {
-            bot.telegram.sendMessage(user.chatId, "👨‍🏫 Günaydın! Yasin Hoca burada. Bugünün ödevlerini yaptın mı? Kendini geliştirmek istiyorsan her gün düzenli çalışmalısın. Eğer aksatırsan eksi puan ve ceza alabilirsin, haberin olsun. Hemen Kelime Avı'na gir ve başla! 🚀").catch(e => {});
-        }
-    });
-}
 
 async function postToChannel(topic = "", fileId = null, fileType = "photo") {
     const channelId = "@turkishly"; // Sadece @turkishly kanalına gönderilecek şekilde ayarlandı
@@ -635,13 +639,6 @@ bot.on(['photo', 'document'], async (ctx) => {
     }
 });
 
-setInterval(() => {
-    const now = new Date();
-    if (now.getHours() === 10) { 
-        sendDailyReminders();
-        postToChannel();
-    }
-}, 3600000); 
 
 bot.hears('🎙 Telaffuz Pratiği Yap', (ctx) => ctx.reply("Harika! Telaffuz yeteneklerini geliştirelim. Lütfen aşağıdaki cümleyi sesli olarak oku:\n🎤 'Bugün hava çok güzel!'"));
 bot.hears('☕ Serbest Sohbet Et', (ctx) => ctx.reply("Serbest sohbet moduna geçtik. Seni dinliyorum; dilediğin konuda Türkçe olarak sohbet edebilirsin. 😊"));
@@ -816,22 +813,27 @@ bot.on('inline_query', async (ctx) => {
                 messages: [
                     { 
                         role: "system", 
-                        content: `Sen eşsiz, akademik ve çift yönlü çalışan (Türkçe <-> Özbekçe) bir sözlüksün. Ekstra derin arastırma yeteneğine sahipsin.
-Görevin: Kullanıcının girdiği kelimenin dilini otomatik anla ve MUTLAKA diğer dile çevir. 
-KRİTİK KURAL: "title" alanında her zaman 'Türkçe Kelime - Özbekçe Karşılığı' (Örn: Kalem - Qalam) yazmalısın. 
-"short_desc" alanında ise Özbekçe kısa anlamını vermeyi ASLA unutma. 
-Kelimenin TÜM ANLAMLARINI (derinlikleriyle) ve Varsa EŞ ANLAMLILARINI (yerine kullanılabilecek kelimeleri) listele. Zengin, zarif bir HTML tasarımı oluştur ve metnin en altına Yasin Hoca imzasını ekle.
-Çıktı SADECE JSON olmalıdır.
+                        content: `Sen akademik düzeyde uzman bir Türkolog ve çift dilli (Türkçe - Özbekçe) kıdemli bir sözlük editörüsün.
+Görevin: Kullanıcının girdiği kelimenin hangi dilde (Türkçe mi Özbekçe mi) olduğunu tespit et ve diğer dile profesyonelce çevir.
+
+Hata yapmaman gereken kritik noktalar:
+1. Kesinlikle uydurma (hallucinative) kelime üretme. (Örn: "Saçma" -> "Bekvayt" gibi uydurma kelime ASLA kullanma!)
+2. Doğru Örnekler: "Saçma" (TR) -> "Mantiqsiz / Safsata" (UZ), "Gelecek" (TR) -> "Kelajak" (UZ), "Kitap" (TR) -> "Kitob" (UZ).
+3. Kelimenin türünü (İsim, fiil, sıfat vb.) mutlaka belirt.
+4. Özbekçe çevirilerde sadece Özbek Türkçesi (Latin alfabesi) kullan.
+5. "title" kısmına her zaman '[Kaynak Kelime] → [Hedef Karşılık]' şeklinde yaz.
+6. Eğer kelimenin tam karşılığı yoksa "Tam karşılığı bulunamadı" de veya en yakın akademik anlamı ver.
+
 JSON Şablonu:
 {
-  "title": "Türkçe Kelime - Özbekçe Karşılığı (Örn: Kalem - Qalam)",
-  "short_desc": "Özbekçe kısa karşılığı ve varsa kısa bir özet",
-  "html_view": "🇹🇷 <b>[Türkçe Kelime]</b>\\n🇺🇿 <b>[Özbekçe Kelime]</b>\\n\\n🔍 <b>Anlamları (Ma'nolari):</b> [Kelimenin tüm derin anlamları]\\n🔄 <b>Eş Anlamlılar (Sinonimlar):</b> [Yerine kullanılabilecek diğer kelimeler]\\n\\n📖 <b>Örnek (Misol):</b>\\n🇹🇷 [Özenle seçilmiş Türkçe örnek cümle]\\n🇺🇿 [O cümlenin Özbekçe çevirisi]\\n\\n<i>✍️ Yasin Hoca</i>"
+  "title": "Kelime → Karşılığı (Tür)",
+  "short_desc": "Temel karşılık ve kısa Özbekçe özet",
+  "html_view": "🇹🇷 <b>[Türkçe]</b>\\n🇺🇿 <b>[Özbekçe]</b>\\n\\n📖 <b>Tür (Tur):</b> [Kelime Türü]\\n\\n🔍 <b>Anlamları (Ma'nolari):</b>\\n[Madde madde derin anlamlar]\\n\\n🔄 <b>Eş Anlamlılar (Sinonimlar):</b>\\n[Virgülle ayrılmış benzer kelimeler]\\n\\n✨ <b>Örnek Cümle (Misol):</b>\\n🇹🇷 <i>[Örnek cümle]</i>\\n🇺🇿 [Cümlenin çevirisi]\\n\\n<i>✍️ Yasin Hoca Lûgatı</i>"
 }`
                     },
-                    { role: "user", content: `Aşağıdaki kelimenin her iki dildeki mükemmel çevirisini ve derin anlamlarını ver: ${query}` }
+                    { role: "user", content: `Lütfen şu kelimeyi analiz et ve çevir: ${query}` }
                 ],
-                temperature: 0.3
+                temperature: 0.1
             });
 
             resultData = JSON.parse(comp.choices[0].message.content);
