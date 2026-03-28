@@ -212,7 +212,7 @@ app.post('/api/complete-level', (req, res) => {
             users[userId].stars += 1;
         }
     });
-    [1, 2, 3, 4, 5].forEach(s => {
+    Array.from({ length: 20 }, (_, i) => i + 1).forEach(s => {
         const skey = `${level}-${s}`;
         if (!users[userId].completedSteps.includes(skey)) users[userId].completedSteps.push(skey);
         if (!users[userId].levelPoints[skey] || users[userId].levelPoints[skey] < 20) users[userId].levelPoints[skey] = 20;
@@ -234,7 +234,7 @@ app.post('/api/reset-step', (req, res) => {
         users[userId].completedLevels = users[userId].completedLevels.filter(l => l !== level);
         users[userId].completedSteps = users[userId].completedSteps.filter(s => !s.startsWith(`${level}-`));
         delete users[userId].levelPoints[`${level}-Level`];
-        [1, 2, 3, 4, 5].forEach(s => delete users[userId].levelPoints[`${level}-${s}`]);
+        Array.from({ length: 20 }, (_, i) => i + 1).forEach(s => delete users[userId].levelPoints[`${level}-${s}`]);
     } else {
         const stepKey = `${level}-${step}`;
         const stepWordIds = words.filter(w => w.level === level && parseInt(w.step) === parseInt(step)).map(w => w.id);
